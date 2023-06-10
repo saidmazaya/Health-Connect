@@ -1,12 +1,12 @@
-# Tubes Kel 6B
+# Health Connect
 ---
-Tugas Besar Sistem Basis Data dan Pemrograman Web Lanjutan Kelompok 6 Kom B, Merupakan Clonning Sederhana dari Website Medium
+#### Health Connect Merupakan website untuk berdiskusi mengenai kesehatan baik sesama dokter, maupun antara dokter dan pasien
 
 ## Installation
 
 ### 1. Clone the Repo
 ```shell
-git clone https://github.com/saidmazaya/tubes-sbd-kel6.git
+git clone https://github.com/saidmazaya/Health-Connect.git
 ```
 
 ### 2. Composer Install
@@ -20,22 +20,18 @@ cp .env.example .env
 
 php artisan storage:link
 ```
-Edit the `.env` file and set the `database` and other config for the system after you copy the `.env.example` file. 
-`(FILESYSTEM_DISK = public)`
+Edit the `.env` file and set the `database` and other config for the system after you copy the `.env.example` file.
 
 ### 4. Make Key
 ```shell
 php artisan key:generate
 ```
 
-### 5. Migrate Database And Seed
+### 5. Migrate Database
 ```shell
-php artisan migrate --seed
+php artisan migrate
 ```
-**if you just want to migrate**  
-```shell  
-php artisan migrate  
-```
+---
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
