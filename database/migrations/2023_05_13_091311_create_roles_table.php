@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('roles', function (Blueprint $table) {
@@ -14,9 +17,19 @@ return new class extends Migration
             $table->timestamps();
         });
 
-       
+        //query sql
+
+        // CREATE TABLE roles (
+        //     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        //     name VARCHAR(50),
+        //     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        //     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        // );
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('roles');
