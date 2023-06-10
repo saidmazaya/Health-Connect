@@ -1,4 +1,4 @@
-# Health Connenct
+# Health Connect
 ---
 ### Health Connect Merupakan website untuk berdiskusi mengenai kesehatan baik sesama dokter, maupun antara dokter dan pasien
 
