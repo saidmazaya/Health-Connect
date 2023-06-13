@@ -123,17 +123,7 @@
                     </div>
                     @endif
                 </div>
-                <div class="form-group mb-3">
-                    <label for="duration" class="form-label">Duration (In Minutes)</label>
-                    <input type="number" class="form-control" id="duration" name="duration">
-                    @if ($errors->has('duration'))
-                    <div class="alert alert-danger mt-2">
-                        @foreach ($errors->get('duration') as $error)
-                        <p>{{ $error }}</p>
-                        @endforeach
-                    </div>
-                    @endif
-                </div>
+                
                 <input type="hidden" name="author_id" value="{{ Auth::user()->id }}">
                 <div class="form-group mb-3">
                     <label for="tag" class="form-label">Tag</label>

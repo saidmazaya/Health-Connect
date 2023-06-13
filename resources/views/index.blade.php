@@ -58,9 +58,9 @@
                   </li>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a class="nav-link disabled" href="#"><time datetime="2020-01-01">{{ $data->created_at->format('M d, Y') }}</time></a></li>
                   @if ($data->tags != NULL)
-                  <li class="d-flex align-items-center"><i class="bi bi-tags"></i><a href="{{ route('tag.detail', $data->tags->slug) }}">{{ $data->tags->name }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-heart-pulse-fill"></i><a href="{{ route('tag.detail', $data->tags->slug) }}">{{ $data->tags->name }}</a></li>
                   @else
-                  <li class="d-flex align-items-center"><i class="bi bi-tags"></i><a href="#">-</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-heart-pulse"></i><a href="#">-</a></li>
                   @endif
                 </ul>
               </div>
@@ -91,7 +91,7 @@
 
               
 
-              <h3 class="sidebar-title">Tags</h3>
+              <h3 class="sidebar-title">Kategori</h3>
               <div class="sidebar-item tags">
                 <ul>
                   @foreach ($tag->take(10) as $data)

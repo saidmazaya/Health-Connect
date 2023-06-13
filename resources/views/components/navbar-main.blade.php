@@ -47,7 +47,7 @@
                         </ul>
                     </li>
                     @else
-                    <li><a class="nav-link scrollto" href="/">Home</a></li>
+                    <li><a class="nav-link scrollto" href="/">Forum Diskusi</a></li>
                     <li><a class="nav-link scrollto" href="/write-article">Write</a></li>
                     <li class="dropdown"><a href="#" class="nav-link scrollto mb-1">Guest<i class="bi bi-chevron-down"></i></a>
                         <ul>

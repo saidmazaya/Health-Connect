@@ -11,11 +11,9 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto" href="/">Forum Diskusi</a></li>
+                <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
                 <li><a class="nav-link scrollto" href="/ourstory">Informasi</a></li>
-                <li><a class="nav-link scrollto" href="/write">Write</a></li>
                 <li><a class="nav-link scrollto" href="{{ route('signin') }}">Sign In</a></li>
-                <li><a class="nav-link scrollto" href="{{ route('signup') }}">Get Started</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

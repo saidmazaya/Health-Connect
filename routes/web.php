@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Models\Tag;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListController;
@@ -113,13 +114,13 @@ Route::post('/reset-password', function (Request $request) {
 
 
 
-Route::get('/ourstory', function () {
-    return view('ourstory');
+Route::get('/ourstory', function () {return view('ourstory');});
+
+Route::get('/forum', function () {
+    return view('forum');
 });
 
-Route::get('/write', function () {
-    return view('write');
-});
+Route::get('/write', function () {return view('write');});
 
 Route::get('/menuutama', [ArticleController::class, 'index'])->name('menuutama');
 
