@@ -19,6 +19,8 @@
                 <ul>
                     @if (Auth::check())
                     <li><a class="nav-link scrollto" href="/menuutama">Home</a></li>
+                    <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
+                    <li><a class="nav-link scrollto" href="/ourstory">Informasi</a></li>
                     @if (Auth::user()->role_id == 1)
                     <li><a class="nav-link scrollto" href="{{ route('administrator.create') }}">Write</a></li>
                     @else

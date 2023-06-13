@@ -35,7 +35,7 @@ class ArticleController extends Controller
                     });
             })
             ->where('status', 'Published')
-            ->orderBy('id', 'asc')
+            ->inRandomOrder()
             ->paginate(10);
         $tag = Tag::all();
 

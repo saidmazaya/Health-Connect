@@ -17,7 +17,7 @@ class ArticleIndexController extends Controller
         $tag = Tag::all();
         $articles = Article::with(['tags', 'user'])
             ->where('status', 'Published')
-            ->orderBy('id', 'asc')
+            ->inRandomOrder()
             ->get();
         return view('index', compact('article', 'tag', 'articles'));
     }

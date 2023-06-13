@@ -117,8 +117,9 @@ Route::post('/reset-password', function (Request $request) {
 Route::get('/ourstory', function () {return view('ourstory');});
 
 Route::get('/forum', function () {
-    return view('forum');
-});
+    $dat=Tag::all();
+    return view('forum',compact('dat'));
+}); 
 
 Route::get('/write', function () {return view('write');});
 
