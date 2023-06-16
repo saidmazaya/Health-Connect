@@ -1,23 +1,17 @@
 @extends('layout.home')
 
 @section('konten')
-<section id="about" class="about">
-    <div class="container" data-aos="fade-up">
 
-      <div class="section-title">
-        <h2>About Us</h2>
-      </div>
-    </div>
-</section>
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Team</h2>
+            <h2>ABOUT US</h2>
+            <h3>Team</h3>
             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
           </div>
-  
+   
           <div class="row">
   
             <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
@@ -32,7 +26,7 @@
                   </div>
                 </div>
                 <div class="member-info">
-                  <h4>Walter White</h4>
+                  <h4>M Rafi Devari Hasibuan</h4>
                   <span>Chief Executive Officer</span>
                 </div>
               </div>
@@ -50,8 +44,8 @@
                   </div>
                 </div>
                 <div class="member-info">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
+                  <h4>Said M Mazaya</h4>
+                  <span>Fullstack Engineer</span>
                 </div>
               </div>
             </div>
@@ -68,8 +62,8 @@
                   </div>
                 </div>
                 <div class="member-info">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
+                  <h4>Ibra Rizqy Siregar</h4>
+                  <span>A</span>
                 </div>
               </div>
             </div>
@@ -86,8 +80,8 @@
                   </div>
                 </div>
                 <div class="member-info">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
+                  <h4>ChatGPT</h4>
+                  <span>Mastermind</span>
                 </div>
               </div>
             </div>
@@ -96,4 +90,6 @@
   
         </div>
       </section><!-- End Team Section -->
+
+
 @endsection

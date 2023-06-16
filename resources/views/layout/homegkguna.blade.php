@@ -16,12 +16,8 @@
     @stack('css')
 </head>
 <body>
-    @include('component.navbar')
 
     @yield('konten')
-
-    @include('component.footer')
-
 
     <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
