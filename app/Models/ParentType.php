@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ParentType extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+    ];
+
+    public function category()
+    {
+        return $this->hasMany(Category::class, 'type_id', 'id');
+    }
 }
