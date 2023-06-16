@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('content');
             $table->string('image')->nullable();
             $table->string('slug')->unique();
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('restrict');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
             $table->timestamps();
