@@ -61,6 +61,15 @@ Route::get('/dokter', function () {
 Route::get('/informasi/{id}', function () {
     return view('detail-info');
 });
+
+Route::get('/diskusi', function () {
+    return view('diskusi');
+});
+
+
+Route::get('/detail-diskusi', function () {
+    return view('detail-diskusi');
+});
 // User Route End
 
 

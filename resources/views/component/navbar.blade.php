@@ -6,12 +6,29 @@
 
 <nav id="navbar" class="navbar">
   <ul>
+    @if (Auth::check())
     <li><a class="nav-link scrollto" href="/">Home</a></li>
     <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
     <li><a class="nav-link scrollto" href="/informasi">Informasi</a></li>
     <li><a class="nav-link scrollto o" href="/about">About</a></li>
-   
     <li><a class="getstarted scrollto" href="/login">Login</a></li>
+    @else
+    <li><a class="nav-link scrollto" href="/">Home</a></li>
+    <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
+    <li><a class="nav-link scrollto" href="/informasi">Informasi</a></li>
+    <li><a class="nav-link scrollto o" href="/about">About</a></li>
+    {{-- <li><a class="getstarted scrollto" href="/login">Login</a></li> --}}
+    <li class="dropdown"><a href="#"><span><i class="bi bi-person-circle "></i></span> <i class="bi bi-chevron-down"></i></a>
+      <ul>
+        <li><a href="#">Drop Down 1</a></li>
+        <li><a href="#">Drop Down 2</a></li>
+        <li><a href="#">Drop Down 3</a></li>
+        <li><a href="#">Drop Down 4</a></li>
+      </ul>
+    </li>
+
+    @endif
+    
 
   </ul>
   <i class="bi bi-list mobile-nav-toggle"></i>

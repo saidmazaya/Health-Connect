@@ -2,37 +2,42 @@
 
 @section('konten')
 <section id="hero">
-    <div class="container py-1 h-50">
+    <div class="container py-1 h-50 position-relative" data-aos="fade-up">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-10 col-md-8 col-lg-5 col-xl-5">
           <div class="card text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
   
-              <div class="mb-md-5 mt-md-4 pb-5">
+              <div class="mb-md-5  pb-5">
   
                 <h2 class="fw-bold mb-2 text-uppercase">Selamat Datang!</h2>
                 
                 <p class="text-black-50 mb-5">Masukkan Email Dan Password</p>
                 
-                    <div class="form-outline form-white mb-4">
+                    <div class="form-outline form-white mb-2">
                         <label class="form-label text-black" for="email">Nama</label>
-                        <input type="email" id="email" class="form-control form-control-lg" name="email" required>
+                        <input type="email" id="email" class="form-control" name="email" required>
                     </div>
                 
                     <div class="form-outline form-white mb-4">
                         <label class="form-label text-black" for="email">Username</label>
-                        <input type="email" id="email" class="form-control form-control-lg" name="email" required>
+                        <input type="email" id="email" class="form-control " name="email" required>
                     </div>
 
                     <div class="form-outline form-white mb-4">
                         <label class="form-label text-black" for="email">Email</label>
-                        <input type="email" id="email" class="form-control form-control-lg" name="email" required>
+                        <input type="email" id="email" class="form-control " name="email" required>
                     </div>
                 
                     <div class="form-outline form-white mb-4">
                         <label class="form-label text-black" for="password">Password</label>
-                        <input type="password" id="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required>
+                        <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
                     </div>
+
+                    <div class="form-outline form-white mb-4">
+                      <label class="form-label text-black" for="email">Confirm Password</label>
+                      <input type="email" id="email" class="form-control " name="email" required>
+                  </div>
                 
                     <div class="text-center">
                         <a href="#about" class="btn-get-started scrollto">Login</a>
