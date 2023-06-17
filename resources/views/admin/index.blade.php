@@ -31,6 +31,7 @@
                         ->where('role_id', 3)
                         ->count();
                         $categoryCount = DB::table('categories')->count();
+                        $reportCount = DB::table('report_discussions')->count() + DB::table('report_responses')->count()
                         @endphp
                       <div>
                         <p class="statistics-title">Total User</p>
@@ -51,6 +52,10 @@
                       <div class="d-none d-md-block">
                         <p class="statistics-title">Total Category</p>
                         <h3 class="rate-percentage">{{ $categoryCount }}</h3>
+                      </div>
+                      <div class="d-none d-md-block">
+                        <p class="statistics-title">Total Report</p>
+                        <h3 class="rate-percentage">{{ $reportCount }}</h3>
                       </div>
                     </div>
                   </div>
