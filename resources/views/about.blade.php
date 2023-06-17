@@ -1,5 +1,7 @@
 @extends('layout.home')
 
+@section('title', 'About')
+
 @section('konten')
 
     <!-- ======= Team Section ======= -->
@@ -45,7 +47,7 @@
                 </div>
                 <div class="member-info">
                   <h4>Said M Mazaya</h4>
-                  <span>Chief Technological Officer</span>
+                  <span>Chief Technology Officer</span>
                 </div>
               </div>
             </div>
@@ -63,7 +65,7 @@
                 </div>
                 <div class="member-info">
                   <h4>Ibra Rizqy Siregar</h4>
-                  <span>Motivation Booster</span>
+                  <span>Motivator</span>
                 </div>
               </div>
             </div>
@@ -81,7 +83,7 @@
                 </div>
                 <div class="member-info">
                   <h4>ChatGPT</h4>
-                  <span>Management Consultant</span>
+                  <span>Mastermind</span>
                 </div>
               </div>
             </div>

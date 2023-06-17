@@ -1,7 +1,7 @@
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center justify-content-between">
 
-    <h1 class="logo"><a href="/">Health Connect</a></h1>
+    <h1 class="logo"><a href="index.html">Health Connect</a></h1>
 <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
 <nav id="navbar" class="navbar">

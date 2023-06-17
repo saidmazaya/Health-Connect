@@ -1,5 +1,7 @@
 @extends('layout.home')
 
+@section('title', 'Detail Info')
+
 @section('konten')
 <main id="main">
 

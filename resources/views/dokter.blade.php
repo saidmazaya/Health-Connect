@@ -1,5 +1,7 @@
 @extends('layout.home')
 
+@section('title', 'Dokter')
+
 @section('konten')
     <!-- ======= Breadcrumbs ======= -->
     <main id="main">

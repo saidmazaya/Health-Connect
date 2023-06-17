@@ -1,5 +1,7 @@
 @extends('layout.home')
 
+@section('title', 'Detail Dokter')
+
 @section('konten')
 <main id="main">
 

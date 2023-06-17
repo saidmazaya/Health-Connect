@@ -19,4 +19,9 @@ class ReportResponse extends Model
     {
         return $this->belongsTo(Response::class, 'response_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

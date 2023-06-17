@@ -1,5 +1,7 @@
 @extends('layout.home')
 
+@section('title', 'Informasi')
+
 @section('konten')
 
     <!-- ======= Team Section ======= -->
