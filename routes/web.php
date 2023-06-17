@@ -29,14 +29,22 @@ Route::get('/kategori', function () {
     return view('kategori');
 });
 
-Route::get('/kategori', function () {
-    return view('kategori');
-});
-
 Route::get('/login', function () {
     return view('auth.login');
 });
 
 Route::get('/register', function () {
     return view('auth.register');
+});
+
+Route::get('/informasi', function () {
+    return view('informasi');
+});
+
+Route::get('/dokter', function () {
+    return view('dokter');
+});
+
+Route::get('/informasi/{id}', function () {
+    return view('detail-info');
 });

@@ -45,7 +45,7 @@
                 </div>
                 <div class="member-info">
                   <h4>Said M Mazaya</h4>
-                  <span>Fullstack Engineer</span>
+                  <span>Chief Technological Officer</span>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="member-info">
                   <h4>Ibra Rizqy Siregar</h4>
-                  <span>A</span>
+                  <span>Motivation Booster</span>
                 </div>
               </div>
             </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="member-info">
                   <h4>ChatGPT</h4>
-                  <span>Mastermind</span>
+                  <span>Management Consultant</span>
                 </div>
               </div>
             </div>

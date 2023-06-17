@@ -13,7 +13,7 @@
       <section class="inner-page">
         <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
             <div class="d-flex justify-content-between align-items-center ">
-                <h2>Forum Diskusi</h2>
+                <h2>Pilih Kategori Dokter</h2>
                 {{-- <ol>
                   <li><a href="index.html">Home</a></li>
                   <li>Inner Page</li>

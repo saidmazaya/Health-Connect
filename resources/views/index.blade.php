@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="#about" class="btn-get-started scrollto">Login</a>
+        <a href="/login" class="btn-get-started scrollto">Login</a>
       </div>
       <div class="row icon-boxes">
 
@@ -36,7 +36,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-info-lg"></i></div>
-              <h4 class="title"><a href="">Informasi</a></h4>
+              <h4 class="title"><a href="/informasi">Informasi</a></h4>
               <p class="description">Lihat Informasi Umum Seperti Gejala,Penyebab,Dan Cara Mencegah Suatu Penyakit</p>
             </div>
           </div>
@@ -44,7 +44,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-person-check"></i></div>
-              <h4 class="title"><a href="">Verified Doctor</a></h4>
+              <h4 class="title"><a href="/dokter">Verified Doctor</a></h4>
               <p class="description">Lihat Profil Dokter Terpercaya</p>
             </div>
           </div>
