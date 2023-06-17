@@ -8,7 +8,7 @@
   <ul>
     <li><a class="nav-link scrollto" href="/">Home</a></li>
     <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
-    <li><a class="nav-link scrollto" href="#services">Informasi</a></li>
+    <li><a class="nav-link scrollto" href="/informasi">Informasi</a></li>
     <li><a class="nav-link scrollto o" href="/about">About</a></li>
    
     <li><a class="getstarted scrollto" href="/login">Login</a></li>
