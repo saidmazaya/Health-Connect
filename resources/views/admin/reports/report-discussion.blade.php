@@ -45,21 +45,19 @@
                                             <td>{{ Str::limit($data->discussion->title, 50, '...') }}</td>
                                             <td>{{ $data->total_reports }}</td>
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-question"></i></a>
+                                                <a href="{{ route('report-discussion.detail', $data->discussion_id) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-question"></i></a>
                                                 | <a href="#" class="btn-sm text-decoration-none btn-dark"><i class="fa-solid fa-circle-info"></i></a>
-                                                | <form id="publish-form-{{ $data->id }}" action="#" data-status="Published" method="POST" style="display: inline;">
+                                                | <form id="accept-form-{{ $data->discussion_id }}" action="{{ route('accept.report', $data->discussion_id) }}" data-status="Published" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input type="hidden" name="status" value="Published">
-                                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                                    <button type="button" class="btn-sm text-decoration-none btn-success publish-button" data-article-id="{{ $data->id }}"><i class="fa-solid fa-check"></i></button>
+                                                    <input type="hidden" name="discussion_id" value="{{ $data->discussion_id }}">
+                                                    <button type="button" class="btn-sm text-decoration-none btn-success accept-button" data-report-id="{{ $data->discussion_id }}"><i class="fa-solid fa-check"></i></button>
                                                 </form>
-                                                | <form id="reject-form-{{ $data->id }}" action="#" data-status="Rejected" method="POST" style="display: inline;">
+                                                | <form id="reject-form-{{ $data->discussion_id }}" action="{{ route('reject.report', $data->discussion_id) }}" data-status="Rejected" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input type="hidden" name="status" value="Rejected">
-                                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                                    <button type="button" class="btn-sm text-decoration-none btn-danger reject-button" data-article-id="{{ $data->id }}"><i class="fa-solid fa-x"></i></button>
+                                                    <input type="hidden" name="discussion_id" value="{{ $data->discussion_id }}">
+                                                    <button type="button" class="btn-sm text-decoration-none btn-danger reject-button" data-report-id="{{ $data->discussion_id }}"><i class="fa-solid fa-x"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -79,13 +77,13 @@
 @endsection
 @push('js')
 <script>
-    function publishConfirmation(articleId) {
+    function publishConfirmation(reportId) {
         Swal.fire({
             title: 'Confirmation',
-            text: 'Are you sure you want to publish this comment?',
+            text: 'Are you sure you want to accept this report?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, Publish',
+            confirmButtonText: 'Yes, Accept',
             cancelButtonText: 'Cancel',
             customClass: {
                 icon: 'swal2-icon swal2-warning',
@@ -94,15 +92,15 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Submit form
-                document.querySelector(`#publish-form-${articleId}`).submit();
+                document.querySelector(`#accept-form-${reportId}`).submit();
             }
         });
     }
 
-    function rejectConfirmation(articleId) {
+    function rejectConfirmation(reportId) {
         Swal.fire({
             title: 'Confirmation',
-            text: 'Are you sure you want to reject this comment?',
+            text: 'Are you sure you want to reject this report?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, Reject',
@@ -114,16 +112,16 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Submit form
-                document.querySelector(`#reject-form-${articleId}`).submit();
+                document.querySelector(`#reject-form-${reportId}`).submit();
             }
         });
     }
 
     // Event listener untuk tombol konfirmasi publish
-    const publishButtons = document.querySelectorAll('.publish-button');
+    const publishButtons = document.querySelectorAll('.accept-button');
     publishButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            publishConfirmation(button.dataset.articleId);
+            publishConfirmation(button.dataset.reportId);
         });
     });
 
@@ -131,7 +129,7 @@
     const rejectButtons = document.querySelectorAll('.reject-button');
     rejectButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            rejectConfirmation(button.dataset.articleId);
+            rejectConfirmation(button.dataset.reportId);
         });
     });
 </script>

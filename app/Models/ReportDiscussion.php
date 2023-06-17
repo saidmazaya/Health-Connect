@@ -19,4 +19,9 @@ class ReportDiscussion extends Model
     {
         return $this->belongsTo(Discussion::class, 'discussion_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

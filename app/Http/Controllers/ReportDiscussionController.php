@@ -48,9 +48,17 @@ class ReportDiscussionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($discussion_id)
     {
-        //
+        // Mengambil seluruh report discussion berdasarkan discussion_id yang diambil
+        $reportDiscussions = ReportDiscussion::with(['user', 'discussion'])
+            ->where('discussion_id', $discussion_id)->get();
+
+        // Mengambil discussion saja
+        $discussion = Discussion::where('id', $discussion_id)->first();
+        // Lakukan tindakan lain terhadap $reportDiscussions, seperti menampilkan data atau mengirimkan notifikasi
+
+        return view('admin.reports.report-discussion-detail', compact('reportDiscussions', 'discussion'));
     }
 
     /**
@@ -75,5 +83,32 @@ class ReportDiscussionController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function acceptReport(Request $request)
+    {
+        $discussionId = $request->input('discussion_id');
+
+        Discussion::where('id', $discussionId)->update(['status' => 'Deleted']);
+        ReportDiscussion::where('discussion_id', $discussionId)->delete();
+
+        // Setelah menghapus data, Anda dapat melakukan tindakan lain seperti mengirimkan notifikasi atau mengatur pesan berhasil
+        // ...
+
+        return redirect()->back()->with('message', 'Discussion dan Report yang berhubungan telah diterima dan dihapus.');
+    }
+
+    public function rejectReport(Request $request)
+    {
+        $discussionId = $request->input('discussion_id');
+
+        // dd($discussionId);
+        // Hapus report berdasarkan ID
+        ReportDiscussion::where('discussion_id', $discussionId)->delete();
+
+        // Setelah menghapus data, Anda dapat melakukan tindakan lain seperti mengirimkan notifikasi atau mengatur pesan berhasil
+        // ...
+
+        return redirect()->back()->with('message', 'Report telah ditolak dan dihapus.');
     }
 }

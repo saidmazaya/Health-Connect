@@ -83,4 +83,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(VoteResponse::class);
     }
+
+    public function reportDiscussions()
+    {
+        return $this->hasMany(ReportDiscussion::class);
+    }
+
+    public function reportResponse()
+    {
+        return $this->hasMany(ReportResponse::class);
+    }
 }
