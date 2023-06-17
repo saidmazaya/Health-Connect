@@ -4,7 +4,7 @@
 
 @section('konten')
 <section id="hero">
-  <div class="container py-5 h-50">
+  <div class="container py-5 h-50" data-aos="fade-up">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-10 col-md-8 col-lg-5 col-xl-5">
         <div class="card text-white" style="border-radius: 1rem;">
