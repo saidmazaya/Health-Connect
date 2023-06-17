@@ -26,7 +26,7 @@ class ReportResponseFactory extends Factory
         return [
             'content' => $faker->text(),
             'user_id' => $user_id,
-            'responses_id' => $responses_id,
+            'response_id' => $responses_id,
         ];
     }
 }
