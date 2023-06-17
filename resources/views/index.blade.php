@@ -8,50 +8,62 @@
 <section id="hero" class="d-flex align-items-center">
   <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
     <div class="row justify-content-center">
+      @guest
       <div class="col-xl-7 col-lg-9 text-center">
         <h1>Bersama Menciptakan Kehidupan Yang Baik</h1>
         <h2>Bergabung Ke dalam Komunitas Ini</h2>
       </div>
     </div>
     <div class="text-center">
-      <a href="/login" class="btn-get-started scrollto">Login</a>
+      <a href="/register" class="btn-get-started scrollto">Register</a>
     </div>
-    <div class="row icon-boxes">
-
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-        <div class="icon-box">
-          <div class="icon"><i class="bi bi-chat-left"></i> </div>
-          <h4 class="title"><a href="/forum">Forum Diskusi</a></h4>
-          <p class="description">Forum Dimana Tempat Bertanya Dan Menjawab</p>
-        </div>
-      </div>
-      {{-- ganti ya za-END --}}
-
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-        <div class="icon-box">
-          <div class="icon"><i class="bi bi-heart-pulse"></i></div>
-          <h4 class="title"><a href="/kategori">Kategori Penyakit</a></h4>
-          <p class="description">Lihat Berdasar Kategori Penyakitnya</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-        <div class="icon-box">
-          <div class="icon"><i class="bi bi-info-lg"></i></div>
-          <h4 class="title"><a href="">Informasi</a></h4>
-          <p class="description">Lihat Informasi Umum Seperti Gejala,Penyebab,Dan Cara Mencegah Suatu Penyakit</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
-        <div class="icon-box">
-          <div class="icon"><i class="bi bi-person-check"></i></div>
-          <h4 class="title"><a href="">Verified Doctor</a></h4>
-          <p class="description">Lihat Profil Dokter Terpercaya</p>
-        </div>
-      </div>
-
+    @endguest
+    @auth
+    <div class="col-xl-7 col-lg-9 text-center">
+      <h1>Membantu dan Bertanya Mengenai Kesehatan</h1>
+      <h2>Mulai Berdiskusi</h2>
     </div>
+  </div>
+  <div class="text-center">
+    <a href="/forun" class="btn-get-started scrollto">Diskusi</a>
+  </div>
+  @endauth
+  <div class="row icon-boxes">
+
+    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+      <div class="icon-box">
+        <div class="icon"><i class="bi bi-chat-left"></i> </div>
+        <h4 class="title"><a href="/forum">Forum Diskusi</a></h4>
+        <p class="description">Forum Dimana Tempat Bertanya Dan Menjawab</p>
+      </div>
+    </div>
+    {{-- ganti ya za-END --}}
+
+    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+      <div class="icon-box">
+        <div class="icon"><i class="bi bi-heart-pulse"></i></div>
+        <h4 class="title"><a href="/kategori">Kategori Penyakit</a></h4>
+        <p class="description">Lihat Berdasar Kategori Penyakitnya</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+      <div class="icon-box">
+        <div class="icon"><i class="bi bi-info-lg"></i></div>
+        <h4 class="title"><a href="">Informasi</a></h4>
+        <p class="description">Lihat Informasi Umum Seperti Gejala,Penyebab,Dan Cara Mencegah Suatu Penyakit</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
+      <div class="icon-box">
+        <div class="icon"><i class="bi bi-person-check"></i></div>
+        <h4 class="title"><a href="">Verified Doctor</a></h4>
+        <p class="description">Lihat Profil Dokter Terpercaya</p>
+      </div>
+    </div>
+
+  </div>
   </div>
 </section>
 
