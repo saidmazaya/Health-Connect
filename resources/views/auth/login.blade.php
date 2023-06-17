@@ -13,18 +13,7 @@
                 <h2 class="fw-bold mb-2 text-uppercase">Selamat Datang!</h2>
                 
                 <p class="text-black-50 mb-5">Masukkan Email Dan Password</p>
-                {{-- @if (session('message'))
-                <div class="alert alert-{{ session('message')['type'] }}" role="alert">
-                    {{ session('message')['content'] }}
-                </div>
-                @endif --}}
-                {{-- @if (session()->has('status'))
-                <div class="alert alert-success">
-                    {{ session()->get('status') }}
-                </div>
-                @endif --}}
-                  {{-- <form method="POST" action="{{ route('signin', ['redirect' => url()->current() == route('menuutama') ? route('menuutama') : null]) }}">
-                    @csrf --}}
+                
                     <div class="form-outline form-white mb-4">
                         <label class="form-label text-black" for="email">Email</label>
                         <input type="email" id="email" class="form-control form-control-lg" name="email" required>
@@ -33,19 +22,14 @@
                     <div class="form-outline form-white mb-4">
                         <label class="form-label text-black" for="password">Password</label>
                         <input type="password" id="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required>
-                        {{-- @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror --}}
                     </div>
-                
-                    {{-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="{{ route('password.request') }}">Forgot password?</a></p> --}}
                 
                     <div class="text-center">
                         <a href="#about" class="btn-get-started scrollto">Login</a>
                     </div>
                 
                     <div>
-                        <br><p class="mb-0 text-black">Tidak Punya Akun? <a href="" class="text-black-50 fw-bold">Register</a></p>
+                        <br><p class="mb-0 text-black">Tidak Punya Akun? <a href="/register" class="text-black-50 fw-bold">Register</a></p>
                     </div>
                 </form>
                 
