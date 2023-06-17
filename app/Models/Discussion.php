@@ -35,7 +35,7 @@ class Discussion extends Model
 
     public function report()
     {
-        return $this->hasMany(Discussion::class, 'discussion_id', 'id');
+        return $this->hasMany(ReportDiscussion::class, 'discussion_id', 'id');
     }
 
     public function votes()
