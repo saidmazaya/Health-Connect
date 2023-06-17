@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
+use App\Models\Discussion;
+use App\Models\ParentType;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $discussion = Discussion::where('status', 'Published')
+        ->get();
+
+    return view('index', compact('discussion'));
 });
 
 Route::get('/about', function () {
@@ -22,16 +29,13 @@ Route::get('/about', function () {
 });
 
 Route::get('/forum', function () {
-    return view('forum');
+    $parent = ParentType::paginate(10);
+    $category = Category::all();
+
+    return view('forum', compact('parent', 'category'));
 });
 
-Route::get('/kategori', function () {
-    return view('kategori');
-});
-
-Route::get('/kategori', function () {
-    return view('kategori');
-});
+Route::resource('/kategori', CategoryController::class);
 
 Route::get('/login', function () {
     return view('auth.login');
