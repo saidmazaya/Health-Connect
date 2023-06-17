@@ -81,4 +81,6 @@ Route::prefix('admin')->group(function () {
         'update' => 'report-discussion.update',
         'destroy' => 'report-discussion.delete',
     ]);
+    Route::put('/report-discussion-accept/{id}', [ReportDiscussionController::class, 'acceptReport'])->name('accept.report');
+    Route::put('/report-discussion-reject/{id}', [ReportDiscussionController::class, 'rejectReport'])->name('reject.report');
 });
