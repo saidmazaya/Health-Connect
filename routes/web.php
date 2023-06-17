@@ -6,6 +6,7 @@ use App\Models\ParentType;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ResponseAdminController;
+use App\Http\Controllers\ReportResponseController;
 use App\Http\Controllers\DiscussionAdminController;
 use App\Http\Controllers\ReportDiscussionController;
 
@@ -20,6 +21,7 @@ use App\Http\Controllers\ReportDiscussionController;
 |
 */
 
+// User Route Start
 Route::get('/', function () {
     $discussion = Discussion::where('status', 'Published')
         ->get();
@@ -59,9 +61,10 @@ Route::get('/dokter', function () {
 Route::get('/informasi/{id}', function () {
     return view('detail-info');
 });
+// User Route End
 
 
-
+// Admin Route Start
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->name('dashboard_admin');
@@ -72,6 +75,7 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/response', [ResponseAdminController::class, 'index'])->name('admin.response');
 
+    // Report Discussion
     Route::resource('/report-discussion', ReportDiscussionController::class)->names([
         'index' => 'report-discussion.index',
         'create' => 'report-discussion.create',
@@ -83,4 +87,18 @@ Route::prefix('admin')->group(function () {
     ]);
     Route::put('/report-discussion-accept/{id}', [ReportDiscussionController::class, 'acceptReport'])->name('accept.report');
     Route::put('/report-discussion-reject/{id}', [ReportDiscussionController::class, 'rejectReport'])->name('reject.report');
+
+    // Report Response
+    Route::resource('/report-response', ReportResponseController::class)->names([
+        'index' => 'report-response.index',
+        'create' => 'report-response.create',
+        'store' => 'report-response.store',
+        'show' => 'report-response.detail',
+        'edit' => 'report-response.edit',
+        'update' => 'report-response.update',
+        'destroy' => 'report-response.delete',
+    ]);
+    Route::put('/report-response-accept/{id}', [ReportResponseController::class, 'acceptReport'])->name('response-accept.report');
+    Route::put('/report-response-reject/{id}', [ReportResponseController::class, 'rejectReport'])->name('response-reject.report');
 });
+// Admin Route End

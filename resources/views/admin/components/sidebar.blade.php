@@ -29,7 +29,7 @@
             <div class="collapse" id="comment-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('report-discussion.index') }}">Report Discussion</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Report Response</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('report-response.index') }}">Report Response</a></li>
                 </ul>
             </div>
         </li>
