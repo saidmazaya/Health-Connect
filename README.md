@@ -25,9 +25,13 @@ Edit the `.env` file and set the `database` and other config for the system afte
 php artisan key:generate
 ```
 
-### 5. Migrate Database
+### 5. Migrate Database And Seed
 ```shell
-php artisan migrate
+php artisan migrate --seed
+```
+**if you just want to migrate**  
+```shell  
+php artisan migrate  
 ```
 ---
 
