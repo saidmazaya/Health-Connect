@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="text-center">
-    <a href="/forun" class="btn-get-started scrollto">Diskusi</a>
+    <a href="/forum" class="btn-get-started scrollto">Diskusi</a>
   </div>
   @endauth
   <div class="row icon-boxes">
