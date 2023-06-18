@@ -27,7 +27,7 @@
       <h4 class="mb-3">{{ $data->name }}</h4>
       <ul class="mb-5">
         @foreach ($category->where('type_id', $data->id) as $item)
-        <li><a href="/diskusi">
+        <li><a href="">
             <h5>{{ $item->name }}<h5>
           </a></li>
         @endforeach

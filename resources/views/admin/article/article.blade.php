@@ -12,6 +12,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Article Tables</h4>
+                            <div class="my-3">
+                                <a href="{{ route('articles.create') }}" class="btn btn-outline-info">Add Data</a>
+                            </div>
                             @if (session('message'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('message') }}
@@ -35,8 +38,7 @@
                                             <th>No.</th>
                                             <th style="width: 25%">Title</th>
                                             <th style="width: 25%">Author</th>
-                                            <th>Tag</th>
-                                            <th>Status</th>
+                                            <th>Category</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -46,31 +48,19 @@
                                             <td>{{ $loop->iteration + $article->firstItem() - 1 }}</td>
                                             <td>{{ Str::limit($data->title, 50, '...') }}</td>
                                             <td>{{ $data->user->name }}</td>
-                                            @if ($data->tags)
-                                            <td>{{ $data->tags->name }}</td>
+                                            @if ($data->category)
+                                            <td>{{ $data->category->name }}</td>
                                             @else
                                             <td>-</td>
                                             @endif
-                                            <td>{{ $data->status }}</td>
                                             <td>
-                                                <a href="{{ route('article.show', $data->slug) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
-                                                | <form id="publish-form-{{ $data->id }}" action="{{ route('article.update-status', $data->id) }}" data-status="Published" method="POST" style="display: inline;">
+                                                <a href="#" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
+                                                | <a href="{{ route('articles.edit', $data->slug) }}" class="btn-sm text-decoration-none btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                | <form class="d-inline" action="{{ route('articles.destroy', $data->id) }}" method="POST" id="deleteForm{{ $data->id }}">
                                                     @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="status" value="Published">
-                                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                                    <button type="button" class="btn-sm text-decoration-none btn-success publish-button" data-article-id="{{ $data->id }}"><i class="fa-solid fa-check"></i></button>
+                                                    @method('delete')
+                                                    <button type="button" class="btn-sm btn-danger delete-button" onclick="deleteConfirmation({{ $data->id }})"><i class="fa-solid fa-trash"></i></button>
                                                 </form>
-                                                @if ($data->status == 'Published')
-                                                @else
-                                                | <form id="reject-form-{{ $data->id }}" action="{{ route('article.update-status', $data->id) }}" data-status="Rejected" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="status" value="Rejected">
-                                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                                    <button type="button" class="btn-sm text-decoration-none btn-danger reject-button" data-article-id="{{ $data->id }}"><i class="fa-solid fa-x"></i></button>
-                                                </form>
-                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -89,13 +79,14 @@
 @endsection
 @push('js')
 <script>
-    function publishConfirmation(articleId) {
+    // Fungsi untuk menampilkan SweetAlert konfirmasi
+    function deleteConfirmation(articleId) {
         Swal.fire({
             title: 'Confirmation',
-            text: 'Are you sure you want to publish this article?',
+            text: 'Are you sure you want to delete this article?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, Publish',
+            confirmButtonText: 'Yes, delete',
             cancelButtonText: 'Cancel',
             customClass: {
                 icon: 'swal2-icon swal2-warning',
@@ -104,45 +95,9 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Submit form
-                document.querySelector(`#publish-form-${articleId}`).submit();
+                document.querySelector(`#deleteForm${articleId}`).submit();
             }
         });
     }
-
-    function rejectConfirmation(articleId) {
-        Swal.fire({
-            title: 'Confirmation',
-            text: 'Are you sure you want to reject this article?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, Reject',
-            cancelButtonText: 'Cancel',
-            customClass: {
-                icon: 'swal2-icon swal2-warning',
-                confirmButton: 'swal2-button-confirm',
-            },
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Submit form
-                document.querySelector(`#reject-form-${articleId}`).submit();
-            }
-        });
-    }
-
-    // Event listener untuk tombol konfirmasi publish
-    const publishButtons = document.querySelectorAll('.publish-button');
-    publishButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            publishConfirmation(button.dataset.articleId);
-        });
-    });
-
-    // Event listener untuk tombol konfirmasi reject
-    const rejectButtons = document.querySelectorAll('.reject-button');
-    rejectButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            rejectConfirmation(button.dataset.articleId);
-        });
-    });
 </script>
 @endpush
