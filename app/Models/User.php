@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function specialist()
     {
-        return $this->belongsTo(Role::class, 'specialist_id', 'id');
+        return $this->belongsTo(Specialist::class, 'specialist_id', 'id');
     }
 
     public function articles()
