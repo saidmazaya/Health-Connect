@@ -91,7 +91,7 @@
             </a>
             <div id="faq-list-{{ $data->id }}" class="collapse show" data-bs-parent=".faq-list">
               <p>
-                {{ Str::limit($data->content, 250, '...') }}
+                {{ Str::limit($data->content, 250, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}" class="d-inline">Read more...</a>
               </p>
             </div>
           </li>
