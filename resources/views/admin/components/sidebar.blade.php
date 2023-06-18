@@ -35,13 +35,13 @@
         </li>
         <li class="nav-item nav-category">Forms and Datas</li>
         <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" aria-controls="form-elements">
+            <a class="nav-link" href="{{ route('articles.index') }}" aria-expanded="false" aria-controls="form-elements">
                 <i class="menu-icon fa-solid fa-folder-plus"></i>
                 <span class="menu-title">Articles</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" aria-controls="charts">
+            <a class="nav-link" href="{{ route('category.index') }}" aria-expanded="false" aria-controls="charts">
                 <i class="menu-icon fa-solid fa-tag"></i>
                 <span class="menu-title">Category</span>
             </a>
