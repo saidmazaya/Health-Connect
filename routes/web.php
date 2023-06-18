@@ -129,6 +129,10 @@ Route::get('/diskusi', function () {
 Route::get('/detail-diskusi', function () {
     return view('detail-diskusi');
 });
+
+Route::get('/tampil/{id}', function () {
+    return view('tampil');
+});
 // User Route End
 
 
