@@ -15,19 +15,19 @@
                             <a href="{{ route('report-response.index') }}" class="btn btn-outline-info"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back</a>
                             @if (session('message'))
                             <div class="alert alert-success" role="alert">
-                                {{ session('message') }} 
+                                {{ session('message') }}
                             </div>
                             @endif
                             <div class="my-3 col-12 col-sm-8 col-md-5">
                             </div>
                             <div class="table-responsive">
                                 <div class="mb-3">
-                                    <a href="#" class="fs-3 text-decoration-none">{{ $response->discussion->title }}</a>
+                                    <a href="{{ route('diskusi.show', $response->discussion->slug) }}" class="fs-3 text-decoration-none">{{ $response->discussion->title }}</a>
                                     <h5 class="mt-2" style="font-weight: 700">Response : {{ $response->content }}</h5>
                                 </div>
-                                @foreach ($reportResponse as $data) 
-                                    <h5>User : {{ $data->user->name }}</h5>
-                                    <p class="mb-3">Message : {{ $data->content }}</p>
+                                @foreach ($reportResponse as $data)
+                                <h5>User : {{ $data->user->name }}</h5>
+                                <p class="mb-3">Message : {{ $data->content }}</p>
                                 @endforeach
                             </div>
                         </div>

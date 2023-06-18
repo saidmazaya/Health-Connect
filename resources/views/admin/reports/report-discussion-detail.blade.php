@@ -22,7 +22,7 @@
                             </div>
                             <div class="table-responsive">
                                 <div class="mb-3">
-                                    <a href="#" class="fs-3 text-decoration-none">{{ $discussion->title }}</a>
+                                    <a href="{{ route('diskusi.show', $discussion->slug) }}" class="fs-3 text-decoration-none">{{ $discussion->title }}</a>
                                 </div>
                                 @foreach ($reportDiscussions as $data) 
                                     <h5>User : {{ $data->user->name }}</h5>
