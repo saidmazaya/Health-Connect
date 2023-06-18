@@ -12,7 +12,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add Article</h4>
-                            <form action="{{ route('administrator.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="title">Title</label>
@@ -60,37 +60,25 @@
                                     </div>
                                     @endif
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="duration">Duration</label>
-                                    <input type="number" class="form-control" id="duration" name="duration">
-                                    @if ($errors->has('duration'))
-                                    <div class="alert alert-danger mt-2">
-                                        @foreach ($errors->get('duration') as $error)
-                                        <p>{{ $error }}</p>
-                                        @endforeach
-                                    </div>
-                                    @endif
-                                </div>
                                 <input type="hidden" name="author_id" value="{{ Auth::user()->id }}">
                                 <div class="form-group mb-3">
-                                    <label for="tag">Tag</label>
-                                    <select name="tag_id" id="tag" class="form-select">
+                                    <label for="category">Category</label>
+                                    <select name="category_id" id="category" class="form-select" required>
                                         <option value="">Select One</option>
-                                        @foreach ($tag as $data)
+                                        @foreach ($category as $data)
                                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('tag_id'))
+                                    @if ($errors->has('category_id'))
                                     <div class="alert alert-danger mt-2">
-                                        @foreach ($errors->get('tag_id') as $error)
+                                        @foreach ($errors->get('category_id') as $error)
                                         <p>{{ $error }}</p>
                                         @endforeach
                                     </div>
                                     @endif
                                 </div>
-                                <input type="hidden" name="status" value="Published">
                                 <button type="submit" class="btn btn-primary me-2">Publish</button>
-                                <a href="{{ route('administrator.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                                <a href="{{ route('articles.index') }}" class="btn btn-outline-secondary">Cancel</a>
                             </form>
                         </div>
                     </div>
