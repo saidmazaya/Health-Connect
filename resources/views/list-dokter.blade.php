@@ -3,8 +3,6 @@
 @section('title', 'List')
 
 @section('konten')
-
-@section('konten')
     <!-- ======= Breadcrumbs ======= -->
     <main id="main">
     <section class="breadcrumbs">
