@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ArticleAdminController;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Discussion;
@@ -10,14 +9,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryAdminController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\ArticleAdminController;
+use App\Http\Controllers\CategoryAdminController;
 use App\Http\Controllers\ResponseAdminController;
 use App\Http\Controllers\ReportResponseController;
 use App\Http\Controllers\DiscussionAdminController;
+use App\Http\Controllers\DoctorAdminController;
 use App\Http\Controllers\ReportDiscussionController;
+use App\Http\Controllers\SpecialistAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,8 +176,18 @@ Route::prefix('admin')->middleware('auth', 'must-admin')->group(function () {
     Route::put('/report-response-accept/{id}', [ReportResponseController::class, 'acceptReport'])->name('response-accept.report');
     Route::put('/report-response-reject/{id}', [ReportResponseController::class, 'rejectReport'])->name('response-reject.report');
 
-    Route::resource('/articles', ArticleAdminController::class);
+    Route::resource('/articles', ArticleAdminController::class)->except('show');
 
-    Route::resource('/category', CategoryAdminController::class);
+    Route::resource('/category', CategoryAdminController::class)->except('show');
+
+    Route::resource('/user', UserAdminController::class)->only('index');
+    Route::get('/user-track/{username}', [UserAdminController::class, 'userTrack'])->name('user.track');
+    Route::put('/user-upgrade/{id}', [UserAdminController::class, 'userUpgrade'])->name('user.accept-doctor');
+
+    Route::resource('/doctor', DoctorAdminController::class)->only('index');
+    Route::get('/doctor-track/{username}', [DoctorAdminController::class, 'userTrack'])->name('doctor.track');
+    Route::put('/doctor-demote/{id}', [DoctorAdminController::class, 'doctorDemote'])->name('doctor.demote');
+
+    Route::resource('/specialist', SpecialistAdminController::class)->except('show');
 });
 // Admin Route End
