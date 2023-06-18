@@ -22,6 +22,7 @@ class CategoryAdminController extends Controller
             ->where(function ($query) use ($keyword) {
                 $query->where('name', 'LIKE', '%' . $keyword . '%');
             })
+            ->orderBy('name')
             ->paginate(10);
         return view('admin.category.category', compact('category', 'keyword'));
     }
@@ -82,7 +83,7 @@ class CategoryAdminController extends Controller
 
         $category->update($request->all());
 
-        return redirect(route('category.index'))->with('message', 'Perubahan Data Tag Berhasil');
+        return redirect(route('category.index'))->with('message', 'Perubahan Data Category Berhasil');
     }
 
     /**
