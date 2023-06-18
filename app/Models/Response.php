@@ -32,6 +32,11 @@ class Response extends Model
         return $this->hasMany(Response::class, 'parent_id', 'id');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(Response::class, 'parent_id', 'id');
+    }
+
     public function report()
     {
         return $this->hasMany(ReportResponse::class, 'response_id', 'id');

@@ -4,7 +4,7 @@
 
 @section('konten')
 
-{{-- ganti ya za-Start --}}
+{{--Welcome-Start --}}
 <section id="hero" class="d-flex align-items-center">
   <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
     <div class="row justify-content-center">
@@ -20,12 +20,12 @@
     @endguest
     @auth
     <div class="col-xl-7 col-lg-9 text-center">
-      <h1>Membantu dan Bertanya Mengenai Kesehatan</h1>
+      <h1>Solusi Kesehatan Modern Dalam Jangkauanmu</h1>
       <h2>Mulai Berdiskusi</h2>
     </div>
   </div>
   <div class="text-center">
-    <a href="/forun" class="btn-get-started scrollto">Diskusi</a>
+    <a href="/diskusi" class="btn-get-started scrollto">Diskusi</a>
   </div>
   @endauth
   <div class="row icon-boxes">
@@ -37,7 +37,7 @@
         <p class="description">Forum Dimana Tempat Bertanya Dan Menjawab</p>
       </div>
     </div>
-    {{-- ganti ya za-END --}}
+    {{--Welcome-END --}}
 
     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
       <div class="icon-box">
@@ -91,7 +91,7 @@
             </a>
             <div id="faq-list-{{ $data->id }}" class="collapse show" data-bs-parent=".faq-list">
               <p>
-                {{ Str::limit($data->content, 250, '...') }}
+                {{ Str::limit($data->content, 250, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}" class="d-inline">Read more...</a>
               </p>
             </div>
           </li>

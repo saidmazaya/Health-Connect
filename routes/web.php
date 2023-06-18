@@ -12,10 +12,19 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\ArticleAdminController;
+use App\Http\Controllers\CategoryAdminController;
 use App\Http\Controllers\ResponseAdminController;
 use App\Http\Controllers\ReportResponseController;
 use App\Http\Controllers\DiscussionAdminController;
+use App\Http\Controllers\DiscussionController;
+use App\Http\Controllers\DoctorAdminController;
 use App\Http\Controllers\ReportDiscussionController;
+use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\SpecialistAdminController;
+use App\Http\Controllers\VoteDiscussionController;
+use App\Http\Controllers\VoteResponseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +117,16 @@ Route::get('/forum', function () {
 
 Route::resource('/kategori', CategoryController::class);
 
+Route::resource('/diskusi', DiscussionController::class);
+
+Route::get('/vote-up/{id}', [VoteDiscussionController::class, 'voteUp'])->name('vote.up')->middleware('auth');
+Route::get('/vote-down/{id}', [VoteDiscussionController::class, 'voteDown'])->name('vote.down')->middleware('auth');
+
+Route::get('/vote-response-up/{id}', [VoteResponseController::class, 'voteUp'])->name('vote-response.up')->middleware('auth');
+Route::get('/vote-response-down/{id}', [VoteResponseController::class, 'voteDown'])->name('vote-response.down')->middleware('auth');
+
+Route::resource('/response', ResponseController::class)->only(['store', 'destroy']);
+
 Route::get('/informasi', function () {
     return view('informasi');
 });
@@ -120,12 +139,16 @@ Route::get('/informasi/{id}', function () {
     return view('detail-info');
 });
 
-Route::get('/diskusi', function () {
-    return view('diskusi');
+Route::get('/profil/{username}', function () {
+    return view('profil');
 });
 
-Route::get('/detail-diskusi', function () {
-    return view('detail-diskusi');
+Route::get('/tampil/{id}', function () {
+    return view('tampil');
+});
+
+Route::get('/profil/{username}', function () {
+    return view('profil');
 });
 // User Route End
 
@@ -166,5 +189,19 @@ Route::prefix('admin')->middleware('auth', 'must-admin')->group(function () {
     ]);
     Route::put('/report-response-accept/{id}', [ReportResponseController::class, 'acceptReport'])->name('response-accept.report');
     Route::put('/report-response-reject/{id}', [ReportResponseController::class, 'rejectReport'])->name('response-reject.report');
+
+    Route::resource('/articles', ArticleAdminController::class)->except('show');
+
+    Route::resource('/category', CategoryAdminController::class)->except('show');
+
+    Route::resource('/user', UserAdminController::class)->only('index');
+    Route::get('/user-track/{username}', [UserAdminController::class, 'userTrack'])->name('user.track');
+    Route::put('/user-upgrade/{id}', [UserAdminController::class, 'userUpgrade'])->name('user.accept-doctor');
+
+    Route::resource('/doctor', DoctorAdminController::class)->only('index');
+    Route::get('/doctor-track/{username}', [DoctorAdminController::class, 'userTrack'])->name('doctor.track');
+    Route::put('/doctor-demote/{id}', [DoctorAdminController::class, 'doctorDemote'])->name('doctor.demote');
+
+    Route::resource('/specialist', SpecialistAdminController::class)->except('show');
 });
 // Admin Route End

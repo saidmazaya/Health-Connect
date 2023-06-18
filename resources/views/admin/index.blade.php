@@ -21,18 +21,21 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="statistics-details d-flex align-items-center justify-content-between">
-                        @php
-                        $articleCount = DB::table('articles')->count();
-                        $discussionCount = DB::table('discussions')->count();
-                        $userCount = DB::table('users')
-                        ->where('role_id', '!=', 1)
-                        ->count();
-                        $doctorCount = DB::table('users')
-                        ->where('role_id', 3)
-                        ->count();
-                        $categoryCount = DB::table('categories')->count();
-                        $reportCount = DB::table('report_discussions')->count() + DB::table('report_responses')->count()
-                        @endphp
+                      @php
+                      $articleCount = DB::table('users')
+                      ->join('articles', 'users.id', '=', 'articles.author_id')
+                      ->where('users.role_id', 1)
+                      ->count();
+                      $discussionCount = DB::table('discussions')->count();
+                      $userCount = DB::table('users')
+                      ->where('role_id', '!=', 1)
+                      ->count();
+                      $doctorCount = DB::table('users')
+                      ->where('role_id', 3)
+                      ->count();
+                      $categoryCount = DB::table('categories')->count();
+                      $reportCount = DB::table('report_discussions')->count() + DB::table('report_responses')->count()
+                      @endphp
                       <div>
                         <p class="statistics-title">Total User</p>
                         <h3 class="rate-percentage">{{ $userCount }}</h3>

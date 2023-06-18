@@ -44,7 +44,7 @@
                                             <td>{{ Str::limit($data->discussion->title, 30, '...') }}</td>
                                             <td>{{ $data->status }}</td>
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
+                                                <a href="{{ route('diskusi.show', $data->discussion->slug) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach
