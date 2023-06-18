@@ -136,6 +136,10 @@ Route::get('/detail-diskusi', function () {
 Route::get('/tampil/{id}', function () {
     return view('tampil');
 });
+
+Route::get('/profil/{username}', function () {
+    return view('profil');
+});
 // User Route End
 
 

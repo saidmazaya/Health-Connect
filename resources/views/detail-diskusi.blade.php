@@ -41,7 +41,7 @@
           
                     <div class="col-lg-4">
                       <div class="portfolio-info">
-                        <h3><a href="">Nama Orangnya</a></h3>
+                        <h3><img style="border-radius: 1000px;height:50px;width:50px" src="assets/img/team/orang3.jpg" alt=""><a href=""> Nama Orangnya</a></h3>
                         <ul>
                           <li><strong>Jenis</strong>: User</li>
                           <li>Kategori Pertanyaan: <a href="" style="color: blue" class="btn">Hati</a> </li>
@@ -79,7 +79,9 @@
 
 {{-- response dengan reply  --}}
     <div style="margin-left: 12px" class="container">
-        <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
+      {{-- kalau user tidak memakai foto profil  --}}
+        {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p> --}}
+        <img style="border-radius: 1000px;height:25px;width:25px" src="assets/img/team/orang3.jpg" alt=""><b> Nama</b> <i>3 mei 2022</i>
         <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
         </div>
@@ -92,7 +94,7 @@
         {{-- reply --}}
           <i class="bi bi-arrow-return-right"> Reply</i>
         <div style="margin-left: 15px" class="container">
-          <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
+          <img style="border-radius: 1000px;height:25px;width:25px" src="assets/img/team/orang3.jpg" alt=""><b> Nama</b> <i>3 mei 2022</i>
           <div>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
           </div>
@@ -109,8 +111,8 @@
 
 {{-- response tanpa reply  --}}
     <div style="margin-left: 12px" class="container">
-        <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-        <div>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="assets/img/team/orang3.jpg" alt=""><b> Nama</b> <i>3 mei 2022</i>
+      <div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
         </div>
         <a class="btn"><i class="bi bi-arrow-up">100</i></a>
@@ -134,7 +136,7 @@
 {{-- komentar  --}}
 <div id="komen" class="row mt-4 container">
   <div class="col-1 d-flex justify-content-start">
-    <img style="border-radius: 1000px;height:50px" src="assets/img/team/orang3.jpg" alt="">
+    <img style="border-radius: 1000px;height:50px;width:50px" src="assets/img/team/orang3.jpg" alt="">
   </div>
   <div class="col-11 d-flex justify-content-end">
     <textarea placeholder="Tambah Komentar.........." class="form-control" name="" id="" cols="30" rows="10"></textarea>
