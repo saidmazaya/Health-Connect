@@ -3,7 +3,12 @@
 
     <h1 class="logo"><a href="/">Health Connect</a></h1>
     <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+    <form action="">
+      <input type="text" style="border-radius: 4px; width: 6cm; padding: 4px" name="keyword" placeholder="Search...">
+                    <button type="submit" style="padding: 4px;">
+                        <i class="bi bi-search"></i>
+                    </button>
+      </form>
     <nav id="navbar" class="navbar">
       <ul>
         @if (Auth::check())
