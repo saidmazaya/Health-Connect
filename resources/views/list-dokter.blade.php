@@ -17,7 +17,7 @@
           
             <section id="services" class="services section-bg">
               <div class="container" data-aos="fade-up"> 
-                <h2>Daftar Dokter Tersedia</h2> 
+                <h2>Daftar Dokter <b>Hewan</b> Tersedia</h2> 
                 <div class="row">
                 {{-- form dokter  --}}
 
@@ -28,6 +28,7 @@
                     <div class="icon-box">
                       <img style="height: 310px;width: 310px" src="/assets/img/team/tes3.jpg.jpg" alt="">
                       <h4><a href="/dokter/x">Dr.Said M Mazaya M.Ma.Spd</a></h4>
+                      <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
                    </div>
                   </div>
 
@@ -35,6 +36,7 @@
                     <div class="icon-box">
                       <img style="height: 310px;width: 310px" src="/assets/img/team/tes3.jpg.jpg" alt="">
                       <h4><a href="/dokter/x">Dr.Said M Mazaya M.Ma.Spd</a></h4>
+                      <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
                    </div>
                   </div>
 
@@ -42,6 +44,7 @@
                     <div class="icon-box">
                       <img style="height: 310px;width: 310px" src="/assets/img/team/tes3.jpg.jpg" alt="">
                       <h4><a href="/dokter/x">Dr.Said M Mazaya M.Ma.Spd</a></h4>
+                      <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
                    </div>
                   </div>
 
@@ -49,6 +52,7 @@
                     <div class="icon-box">
                       <img style="height: 310px;width: 310px" src="/assets/img/team/tes3.jpg.jpg" alt="">
                       <h4><a href="/dokter/x">Dr.Said M Mazaya M.Ma.Spd</a></h4>
+                      <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
                    </div>
                   </div>
         
