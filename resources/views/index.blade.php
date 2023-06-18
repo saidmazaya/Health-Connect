@@ -4,7 +4,7 @@
 
 @section('konten')
 
-{{-- ganti ya za-Start --}}
+{{--Welcome-Start --}}
 <section id="hero" class="d-flex align-items-center">
   <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
     <div class="row justify-content-center">
@@ -37,7 +37,7 @@
         <p class="description">Forum Dimana Tempat Bertanya Dan Menjawab</p>
       </div>
     </div>
-    {{-- ganti ya za-END --}}
+    {{--Welcome-END --}}
 
     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
       <div class="icon-box">
