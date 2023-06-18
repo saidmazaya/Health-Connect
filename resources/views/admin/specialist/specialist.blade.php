@@ -53,8 +53,7 @@
                                             @endphp
                                             <td>{{ $specialistCount }}</td>
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info">Detail</a>
-                                                | <a href="{{ route('specialist.edit', $data->id) }}" class="btn-sm text-decoration-none btn-primary">Edit</a>
+                                                <a href="{{ route('specialist.edit', $data->id) }}" class="btn-sm text-decoration-none btn-primary">Edit</a>
                                             </td>
                                         </tr>
                                         @endforeach
