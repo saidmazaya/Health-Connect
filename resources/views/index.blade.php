@@ -28,7 +28,6 @@
     <a href="/forum" class="btn-get-started scrollto">Diskusi</a>
   </div>
   @endauth
-   {{--Welcome-END --}}
   <div class="row icon-boxes">
 
     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
@@ -38,7 +37,7 @@
         <p class="description">Forum Dimana Tempat Bertanya Dan Menjawab</p>
       </div>
     </div>
-   
+    {{--Welcome-END --}}
 
     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
       <div class="icon-box">

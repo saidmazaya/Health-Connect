@@ -47,19 +47,19 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" aria-controls="tables">
+            <a class="nav-link" href="{{ route('user.index') }}" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon fa-solid fa-user"></i>
                 <span class="menu-title">User Table</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" aria-controls="tables">
+            <a class="nav-link" href="{{ route('doctor.index') }}" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon fa-solid fa-user-doctor"></i>
                 <span class="menu-title">Doctor Table</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" aria-controls="tables">
+            <a class="nav-link" href="{{ route('specialist.index') }}" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon fa-solid fa-stethoscope"></i>
                 <span class="menu-title">Specialist</span>
             </a>
