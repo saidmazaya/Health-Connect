@@ -11,9 +11,10 @@
         <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
         <li><a class="nav-link scrollto" href="/informasi">Informasi</a></li>
         <li><a class="nav-link scrollto o" href="/about">About</a></li>
+        <li><a class="nav-link scrollto o" href="/create">Create Discussion</a></li>
         <li class="dropdown"><a href="#"><span><i class="bi bi-person-circle" style="font-size: 20px"></i></span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="" class="nav nav-link disabled">{{ Auth::user()->name }}</a></li>
+            <li><a href="/profil/tes" class="nav nav-link disabled">{{ Auth::user()->name }}</a></li>
             <li><a href="#">Drop Down 1</a></li>
             <li><a href="#">Drop Down 2</a></li>
             <li><a href="#">Drop Down 3</a></li>

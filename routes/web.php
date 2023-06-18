@@ -130,12 +130,20 @@ Route::get('/detail-diskusi', function () {
     return view('detail-diskusi');
 });
 
+Route::get('/create', function () {
+    return view('create');
+});
+
 Route::get('/tampil/{id}', function () {
     return view('tampil');
 });
 
 Route::get('/dokter/{spesialis}', function () {
     return view('list-dokter');
+});
+
+Route::get('/profil/{username}', function () {
+    return view('profil');
 });
 // User Route End
 
