@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Response;
+use App\Models\Discussion;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ResponseController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,17 +29,25 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Response::create($request->all());
-        
-        return redirect()->back()->with('message', 'Comment Berhasil di Post');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($username)
     {
-        //
+        $user = User::where('username', $username)->first();
+
+        if ($user) {
+            $discussion = Discussion::where('author_id', $user->id)
+                ->where('status', 'Published')
+                ->get();
+
+            return view('profil', compact('user', 'discussion'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -60,16 +69,8 @@ class ResponseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $response = Response::findOrFail($id);
-        
-        if ($response->user_id !== auth()->user()->id) {
-            abort(403, 'Unauthorized');
-        }
-
-        $response->delete();
-
-        return redirect()->back()->with('message', 'Comment Berhasil di Hapus');
+        //
     }
 }

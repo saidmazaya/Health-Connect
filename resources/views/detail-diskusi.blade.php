@@ -140,6 +140,20 @@
       @else
       <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
 
+      @if (Auth::check())
+      @if (Auth::user()->id == $data->user->id)
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+        <a><i class="bi bi-trash"></i></a>
+      </button>
+      <form class="dropdown-menu p-4" action="{{ route('response.destroy', $data->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <div><i>Apakah Anda Yakin Ingin Menghapus Ini?</i></div>
+        <button type="submit" class="btn btn-danger mt-2">Hapus</button>
+      </form>
+      @endif
+      @endif
+
       {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>{{ $data->user->name }}</b> <i>3 mei 2022</i> </p> --}}
       @endif
       <div class="mt-2">
@@ -220,6 +234,21 @@
         <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
         @else
         <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+
+        @if (Auth::check())
+        @if (Auth::user()->id == $data->user->id)
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+          <a><i class="bi bi-trash"></i></a>
+        </button>
+        <form class="dropdown-menu p-4" action="{{ route('response.destroy', $data->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <div><i>Apakah Anda Yakin Ingin Menghapus Ini?</i></div>
+          <button type="submit" class="btn btn-danger mt-2">Hapus</button>
+        </form>
+        @endif
+        @endif
+
         @endif
         <div class="mt-2">
           {{ $data->content }}

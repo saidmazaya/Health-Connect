@@ -108,16 +108,67 @@ class DiscussionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        // Cari diskusi berdasarkan ID
+        $discussion = Discussion::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki akses untuk mengedit diskusi
+        if ($discussion->author_id != auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Update kolom 'content' pada model diskusi
+        $discussion->content = $request->input('content');
+        $discussion->save();
+
+        return redirect()->back()->with('message', 'Diskusi berhasil diperbarui');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Cari diskusi berdasarkan ID
+        $discussion = Discussion::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki akses untuk menghapus diskusi
+        if ($discussion->author_id !== auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Hapus diskusi
+        $discussion->delete();
+
+        return redirect()->back()->with('message', 'Diskusi berhasil dihapus');
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'category_id' => 'required',
+        ]);
+
+        // Cari diskusi berdasarkan ID
+        $discussion = Discussion::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki akses untuk mengedit diskusi
+        if ($discussion->author_id != auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Update kolom 'category_id' pada model diskusi
+        $discussion->category_id = $request->input('category_id');
+        $discussion->save();
+
+        return redirect()->back()->with('message', 'Category berhasil diperbarui');
     }
 }

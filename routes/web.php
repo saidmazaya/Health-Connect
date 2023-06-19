@@ -22,6 +22,7 @@ use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\DoctorAdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportDiscussionController;
 use App\Http\Controllers\ResponseController;
@@ -126,6 +127,9 @@ Route::get('/kategori/{slug}', [CategoryController::class, 'show'])->name('kateg
 
 Route::get('/diskusi/create', [DiscussionController::class, 'create'])->name('diskusi.create')->middleware('auth');
 Route::post('/diskusi', [DiscussionController::class, 'store'])->name('diskusi.store')->middleware('auth');
+Route::put('/diskusi/{id}', [DiscussionController::class, 'update'])->name('diskusi.update')->middleware('auth');
+Route::delete('/diskusi-destroy/{id}', [DiscussionController::class, 'destroy'])->name('diskusi.destroy')->middleware('auth');
+Route::put('/diskusi-category/{id}', [DiscussionController::class, 'updateCategory'])->name('diskusi.category')->middleware('auth');
 
 Route::resource('/diskusi', DiscussionController::class)->only(['index', 'show']);
 
@@ -146,14 +150,9 @@ Route::resource('/informasi', InformationController::class)->only(['index', 'sho
 
 Route::resource('/dokter', DoctorController::class)->only(['index', 'show']);
 
-Route::get('/profil/{username}', function () {
-    return view('profil');
-});
-
-Route::get('/profil/{username}', function () {
-    return view('profil');
-});
+Route::resource('/profil', ProfileController::class)->middleware('auth');
 // User Route End
+
 
 
 // Admin Route Start
