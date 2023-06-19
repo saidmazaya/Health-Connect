@@ -144,7 +144,7 @@
                 <h3><img style="border-radius: 10px;height:auto;width:200px" src="/assets/img/team/orang1.jpg" alt=""></h3>
                       
                 <ul>
-                  <li><strong>Nama</strong>: Said</li>
+                  <li><strong>Nama</strong>: Said <a href="/edit-profil"><i class="bi bi-pencil-square">Edit</i></a></li> 
                   <li><strong>Email</strong>: Said572@healthconnect.com</li>
                   <li><strong>Ras</strong>: User</li>
                   <li>About</li>
