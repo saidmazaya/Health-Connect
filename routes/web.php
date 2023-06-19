@@ -20,6 +20,7 @@ use App\Http\Controllers\ReportResponseController;
 use App\Http\Controllers\DiscussionAdminController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\DoctorAdminController;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportDiscussionController;
 use App\Http\Controllers\ResponseController;
@@ -137,10 +138,7 @@ Route::get('/search', [SearchController::class, 'searchBar'])->name('search');
 Route::post('/report-discussion', [ReportController::class, 'ReportDiscussion'])->name('report.discussion');
 Route::post('/report-response', [ReportController::class, 'ReportResponse'])->name('report.response');
 
-
-Route::get('/informasi', function () {
-    return view('informasi');
-});
+Route::resource('/informasi', InformationController::class)->only(['index', 'show']);
 
 Route::get('/dokter', function () {
     return view('dokter');
