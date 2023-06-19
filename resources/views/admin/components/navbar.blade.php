@@ -33,10 +33,10 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="/dashboard">
-                <img src="/images/PREMIUM.png" alt="logo" />
+                <img src="/images/logo.png" alt="logo" />
             </a>
             <a class="navbar-brand brand-logo-mini" href="/dashboard">
-                <img src="/images/premium-mini.png" alt="logo" />
+                <img src="/images/logo.png" alt="logo" />
             </a>
         </div>
     </div>

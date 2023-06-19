@@ -13,6 +13,7 @@
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/logo.png" />
     @stack('css')
 </head>
 <body>
