@@ -135,8 +135,25 @@
       @endphp
       <a class="btn {{ $userUpVote ? ' text-primary' : '' }}" href="{{ route('vote-response.up', $data->id) }}"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
       <a class="btn {{ $userDownVote ? ' text-primary' : '' }}" href="{{ route('vote-response.down', $data->id) }}"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
-      <a class="btn"><i class="bi bi-chat"> Reply</i></a>
+      
+      {{-- reply button  --}}
+
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+          <a><i class="bi bi-chat"> Reply</i></a>
+        </button>
+        <form class="dropdown-menu p-4">
+          <div><i>Reply</i></div>
+          <div class="mb-3">
+           <textarea placeholder="Tambah Komentar......" name="" id="" cols="30" rows="10"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+          {{-- reply button end  --}}
+      
+
       <a class="btn"><i class="bi bi-flag"> Report</i></a>
+      
       <hr>
 
 
