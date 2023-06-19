@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Response;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
-class ResponseController extends Controller
+class InformationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $article = Article::with(['category', 'user'])
+            ->whereHas('user', function ($query) {
+                $query->where('role_id', 1);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+        return view('informasi', compact('article'));
     }
 
     /**
@@ -28,17 +35,23 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Response::create($request->all());
-        
-        return redirect()->back()->with('message', 'Comment Berhasil di Post');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($slug)
     {
-        //
+        $article = Article::with(['user', 'category'])
+            ->where('slug', $slug)
+            ->first();
+
+        if ($article) {
+            return view('detail-info', compact('article'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -60,16 +73,8 @@ class ResponseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $response = Response::findOrFail($id);
-        
-        if ($response->user_id !== auth()->user()->id) {
-            abort(403, 'Unauthorized');
-        }
-
-        $response->delete();
-
-        return redirect()->back()->with('message', 'Comment Berhasil di Hapus');
+        //
     }
 }

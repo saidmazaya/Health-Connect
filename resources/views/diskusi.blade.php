@@ -3,145 +3,65 @@
 @section('title', 'Diskusi')
 
 @section('konten')
-    
+
 <main id="main">
 
-<section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-        <i>Menampilkan Semua Hasil Diskusi</i>
-    </div>
-</section>
-
-<div class="container mt-4">
-    
-<hr>
-   
-{{-- diskusi  --}}
-
-    <div style="margin-left: 12px" class="container">
-        <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-        <div>
-            <b>Contoh Title</b>
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <i>Menampilkan Semua Hasil Diskusi</i>
         </div>
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-        </div>
-        <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-        <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-        <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-        <a class="btn"><i class="bi bi-flag"> Report</i></a>
-        <hr>    
+    </section>
 
-    </div>
+    <div class="container mt-4">
 
-    <div style="margin-left: 12px" class="container">
-      <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-      <div>
-          <b>Contoh Title</b>
-      </div>
-      <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-      </div>
-      <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-      <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-      <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-      <a class="btn"><i class="bi bi-flag"> Report</i></a>
-      <hr>    
-
-  </div>
-
-  <div style="margin-left: 12px" class="container">
-    <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-    <div>
-        <b>Contoh Title</b>
-    </div>
-    <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-    </div>
-    <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-    <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-    <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-    <a class="btn"><i class="bi bi-flag"> Report</i></a>
-    <hr>    
-
-</div>
-
-<div style="margin-left: 12px" class="container">
-  <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-  <div>
-      <b>Contoh Title</b>
-  </div>
-  <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-  </div>
-  <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-  <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-  <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-  <a class="btn"><i class="bi bi-flag"> Report</i></a>
-  <hr>    
-
-</div>
-
-<div style="margin-left: 12px" class="container">
-  <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-  <div>
-      <b>Contoh Title</b>
-  </div>
-  <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-  </div>
-  <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-  <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-  <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-  <a class="btn"><i class="bi bi-flag"> Report</i></a>
-  <hr>    
-
-</div>
-
-<div style="margin-left: 12px" class="container">
-  <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-  <div>
-      <b>Contoh Title</b>
-  </div>
-  <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-  </div>
-  <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-  <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-  <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-  <a class="btn"><i class="bi bi-flag"> Report</i></a>
-  <hr>    
-
-</div>
-
-    <div style="margin-left: 12px" class="container">
-        <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-        <div>
-            <b>Contoh Title</b>
-        </div>
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat! <a href="/detail-diskusi">Read More...</a>
-        </div>
-        <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-        <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-        <a class="btn"><i class="bi bi-heart-pulse"> Jantung</i></a>
-        <a class="btn"><i class="bi bi-flag"> Report</i></a>
         <hr>
-    </div> 
-</div>
+        <div class="d-flex justify-content-start mb-4">
+            <a class="btn btn-primary" style="margin-right: 7px" href="{{ route('diskusi.index', ['sort_by' => 'latest']) }}">Terbaru</a>
+            <a class="btn btn-secondary" href="{{ route('diskusi.index', ['sort_by' => 'votes']) }}">Terbanyak Vote</a>
+        </div>
+        {{-- diskusi --}}
 
-{{-- diskusi end  --}}
-
-
-<section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
+        @foreach ($discussion as $data)
+        <div style="margin-left: 12px" class="container">
+            <p style="font-size: 20px" class="bi bi-person-circle"> <a href="#"><b>{{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
+            <div>
+                <b>{{ $data->title }}</b>
+            </div>
+            <div>
+                {{ Str::limit(strip_tags($data->content), 150, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}">Read More...</a>
+            </div>
+            @php
+            $voteUp = DB::table('votes')    
+            ->where('discussion_id', $data->id)
+            ->where('type', 'Upvote')
+            ->count();
+            $voteDown = DB::table('votes')
+            ->where('discussion_id', $data->id)
+            ->where('type', 'Downvote')
+            ->count();
+            @endphp
+            <a class="btn"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
+            <a class="btn"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
+            <a class="btn" href="{{ route('kategori.detail', $data->category->slug) }}"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
+            <hr>
+        </div>
+        @endforeach
+        {{ $discussion->links() }}
     </div>
-</section>
 
 
-    
-  
-       
-   
-    </main>
+    {{-- diskusi end --}}
+
+
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+        </div>
+    </section>
+
+
+
+
+
+
+</main>
 @endsection

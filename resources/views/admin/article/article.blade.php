@@ -54,7 +54,7 @@
                                             <td>-</td>
                                             @endif
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
+                                                <a href="{{ route('informasi.show', $data->slug) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
                                                 | <a href="{{ route('articles.edit', $data->slug) }}" class="btn-sm text-decoration-none btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
                                                 | <form class="d-inline" action="{{ route('articles.destroy', $data->id) }}" method="POST" id="deleteForm{{ $data->id }}">
                                                     @csrf

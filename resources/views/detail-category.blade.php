@@ -1,6 +1,6 @@
 @extends('layout.home')
 
-@section('title', 'Search')
+@section('title', 'Detail Kategori')
 
 @section('konten')
 
@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <div class="container mt-4" data-aos="fade-up">
+    <div class="container mt-4">
 
         <hr>
 
@@ -43,7 +43,7 @@
             <hr>
         </div>
         @endforeach
-        {{ $discussion->withQueryString()->links() }}
+        {{ $discussion->links() }}
 
     </div>
 
@@ -76,7 +76,7 @@
 
         </div>
         @endforeach
-        {{ $article->withQueryString()->links() }}
+        {{ $article->links() }}
     </div>
     {{-- Artikel end --}}
 

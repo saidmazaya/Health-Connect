@@ -40,9 +40,9 @@ php artisan migrate
 php artisan storage:link
 ```
 Edit the `.env` file and set the `FILESYSTEM_DISK` to `public`, if dont work try 
-upload photo and try `storage:link` again
+upload photo and try `php artisan storage:link` again
 
-### 7. Avoid Cache
+### 7. Avoid Cache (If There Some Error)
 ```shell
 php artisan route:cache
 
@@ -50,7 +50,7 @@ php artisan optimize
 
 php artisan view:clear
 ```
-
+---
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

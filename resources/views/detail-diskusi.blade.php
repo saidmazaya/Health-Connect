@@ -20,12 +20,39 @@
         <div class="row gy-4">
 
           <div class="col-lg-8">
+            {{-- report button --}}
+
+            @php
+            $userReportDis = Auth::check() ? $discussion->report->where('user_id', Auth::user()->id)->first() : null;
+            @endphp
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" {{ $userReportDis ? 'disabled' : '' }}>
+              <a><i class="{{ $userReportDis ? 'bi bi-check-circle' : 'bi bi-flag' }}"> Report</i></a>
+            </button>
+            @if (Auth::check())
+            <form action="{{ route('report.discussion') }}" method="POST" class="dropdown-menu p-4">
+              @csrf
+              <div><i>Kenapa Anda Report Diskusi Ini</i></div>
+              <div class="mb-3">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="discussion_id" value="{{ $discussion->id }}">
+                <textarea placeholder="Alasan Report......" name="content" id="content" cols="30" rows="5"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            @if (session('message'))
+            <div class="alert alert-success mt-3" role="alert">
+              {{ session('message') }}
+            </div>
+            @endif
+            @endif
+
+            {{-- report button end --}}
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
 
                 <div class="">
                   <div class="portfolio-description">
-                    <h2>{{ $discussion->title }} <a class="btn"><i class="bi bi-flag"> Report</i></a></h2>
+                    <h2>{{ $discussion->title }}</h2>
                     <p>
                       {!! $discussion->content !!}
                     </p>
@@ -34,19 +61,18 @@
 
 
               </div>
-              <div class="swiper-pagination"></div>
             </div>
           </div>
 
           <div class="col-lg-4">
             <div class="portfolio-info">
               @if ($discussion->user->image != null)
-              <h3><img style="border-radius: 1000px;height:50px;width:50px" src="{{ asset('storage/photo/'.$discussion->image) }}" alt=""><a href="#"> {{ $discussion->user->name }}</a></h3>
+              <h3><img style="border-radius: 1000px;height:50px;width:50px" src="{{ asset('storage/photo/'.$discussion->user->image) }}" alt=""><a href="#"> {{ $discussion->user->name }}</a></h3>
               @else
               <h3><img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt=""><a href="#"> {{ $discussion->user->name }}</a></h3>
               @endif
               <ul>
-                <li>Kategori Pertanyaan: <a href="#" class="btn btn-outline-primary">{{ $discussion->category->name }}</a> </li>
+                <li>Kategori Pertanyaan: <a href="{{ route('kategori.detail', $discussion->category->slug) }}" class="btn btn-outline-primary">{{ $discussion->category->name }}</a> </li>
               </ul>
             </div>
             @php
@@ -110,9 +136,23 @@
       @foreach ($discussion->comments->where('status', '!=', 'Deleted') as $data)
       {{-- kalau user tidak memakai foto profil --}}
       @if ($data->user->image != null)
-      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
       @else
       <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+
+      @if (Auth::check())
+      @if (Auth::user()->id == $data->user->id)
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+        <a><i class="bi bi-trash"></i></a>
+      </button>
+      <form class="dropdown-menu p-4" action="{{ route('response.destroy', $data->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <div><i>Apakah Anda Yakin Ingin Menghapus Ini?</i></div>
+        <button type="submit" class="btn btn-danger mt-2">Hapus</button>
+      </form>
+      @endif
+      @endif
 
       {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>{{ $data->user->name }}</b> <i>3 mei 2022</i> </p> --}}
       @endif
@@ -135,8 +175,53 @@
       @endphp
       <a class="btn {{ $userUpVote ? ' text-primary' : '' }}" href="{{ route('vote-response.up', $data->id) }}"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
       <a class="btn {{ $userDownVote ? ' text-primary' : '' }}" href="{{ route('vote-response.down', $data->id) }}"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
-      <a class="btn"><i class="bi bi-chat"> Reply</i></a>
-      <a class="btn"><i class="bi bi-flag"> Report</i></a>
+
+      {{-- reply button --}}
+
+      @if (Auth::check())
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+        <a><i class="bi bi-chat"> Reply</i></a>
+      </button>
+      <form action="{{ route('response.store') }}" method="POST" class="dropdown-menu p-4">
+        @csrf
+        <div><i>Reply</i></div>
+        <div class="mb-3">
+          <input type="hidden" name="status" value="Published">
+          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+          <input type="hidden" name="discussion_id" value="{{ $discussion->id }}">
+          <input type="hidden" name="parent_id" value="{{ $data->id }}">
+          <textarea placeholder="Tambah Komentar......" name="content" id="content" cols="30" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      @endif
+
+      {{-- reply button end --}}
+
+
+      {{-- report button --}}
+
+      @if (Auth::check())
+      @php
+      $userReportRes = Auth::check() ? $data->report->where('user_id', Auth::user()->id)->first() : null;
+      @endphp
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" {{ $userReportRes ? 'disabled' : '' }}>
+        <a><i class="{{ $userReportRes ? 'bi bi-check-circle' : 'bi bi-flag' }}"> Report</i></a>
+      </button>
+      <form action="{{ route('report.response') }}" method="POST" class="dropdown-menu p-4">
+        @csrf
+        <div><i>Kenapa Anda Report Response Ini</i></div>
+        <div class="mb-3">
+          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+          <input type="hidden" name="response_id" value="{{ $data->id }}">
+          <textarea placeholder="Alasan Report......" name="content" id="content" cols="30" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      @endif
+
+      {{-- report button end --}}
+
       <hr>
 
 
@@ -146,9 +231,24 @@
       <i class="bi bi-arrow-return-right"> Reply to {{ $data->parent->user->name }}</i>
       <div style="margin-left: 15px" class="container">
         @if ($data->user->image != null)
-        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
         @else
         <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+
+        @if (Auth::check())
+        @if (Auth::user()->id == $data->user->id)
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+          <a><i class="bi bi-trash"></i></a>
+        </button>
+        <form class="dropdown-menu p-4" action="{{ route('response.destroy', $data->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <div><i>Apakah Anda Yakin Ingin Menghapus Ini?</i></div>
+          <button type="submit" class="btn btn-danger mt-2">Hapus</button>
+        </form>
+        @endif
+        @endif
+
         @endif
         <div class="mt-2">
           {{ $data->content }}
@@ -169,10 +269,32 @@
         @endphp
         <a class="btn {{ $userUpVote ? ' text-primary' : '' }}" href="{{ route('vote-response.up', $data->id) }}"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
         <a class="btn {{ $userDownVote ? ' text-primary' : '' }}" href="{{ route('vote-response.down', $data->id) }}"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
-        <a class="btn"><i class="bi bi-flag"> Report</i></a>
+        {{-- report button --}}
+
+        @if (Auth::check())
+        @php
+        $userReportRes = Auth::check() ? $data->report->where('user_id', Auth::user()->id)->first() : null;
+        @endphp
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" {{ $userReportRes ? 'disabled' : '' }}>
+          <a><i class="{{ $userReportRes ? 'bi bi-check-circle' : 'bi bi-flag' }}"> Report</i></a>
+        </button>
+        <form action="{{ route('report.response') }}" method="POST" class="dropdown-menu p-4">
+          @csrf
+          <div><i>Kenapa Anda Report Response Ini</i></div>
+          <div class="mb-3">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="response_id" value="{{ $data->id }}">
+            <textarea placeholder="Alasan Report......" name="content" id="content" cols="30" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        @endif
+
+        {{-- report button end --}}
         <hr>
       </div>
       {{-- reply end --}}
+
       @endforeach
       @endif
 

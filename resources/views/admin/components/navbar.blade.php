@@ -33,10 +33,10 @@
         </div>
         <div>
             <a class="navbar-brand brand-logo" href="/dashboard">
-                <img src="/images/PREMIUM.png" alt="logo" />
+                <img src="/images/logo.png" alt="logo" />
             </a>
             <a class="navbar-brand brand-logo-mini" href="/dashboard">
-                <img src="/images/premium-mini.png" alt="logo" />
+                <img src="/images/logo.png" alt="logo" />
             </a>
         </div>
     </div>
@@ -81,7 +81,7 @@
                         <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
                         <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
                     </div>
-                    <a class="dropdown-item" href="#"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
+                    <a class="dropdown-item" href="{{ route('profil.show', Auth::user()->username) }}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
                     <a class="dropdown-item" href="/signout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
                 </div>
             </li>

@@ -63,7 +63,7 @@
                                                 {{ $responseCount }}
                                             </td>
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
+                                                <a href="{{ route('profil.show', $data->username) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
                                                 | <a href="{{ route('doctor.track', $data->username) }}" class="btn-sm text-decoration-none btn-primary"><i class="fa-solid fa-shoe-prints"></i></i></a>
                                                 | <form id="accept-form-{{ $data->id }}" action="{{ route('doctor.demote', $data->id) }}" data-status="Published" method="POST" style="display: inline;">
                                                     @csrf

@@ -3,7 +3,7 @@
 
     <h1 class="logo"><a href="/">Health Connect</a></h1>
     <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-    <form action="#" method="GET">
+    <form action="{{ route('search') }}" method="GET">
       <input type="text" style="border-radius: 4px; width: 6cm; padding: 4px" name="keyword" placeholder="Search...">
       <button type="submit" style="padding: 4px;">
         <i class="bi bi-search"></i>
@@ -16,13 +16,12 @@
         <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
         <li><a class="nav-link scrollto" href="/informasi">Informasi</a></li>
         <li><a class="nav-link scrollto o" href="/about">About</a></li>
-        <li><a class="nav-link scrollto o" href="/create">Create Discussion</a></li>
+        <li><a class="nav-link scrollto o" href="{{ route('diskusi.create') }}">Create Discussion</a></li>
         <li class="dropdown"><a href="#"><span><i class="bi bi-person-circle" style="font-size: 20px"></i></span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="/profil/tes">{{ Auth::user()->name }}</a></li>
-            <li><a href="#">Drop Down 1</a></li>
-            <li><a href="#">Drop Down 2</a></li>
-            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="{{ route('profil.show', Auth::user()->username) }}">{{ Auth::user()->name }}</a></li>
+            <li><a href="/kategori">Kategori</a></li>
+            <li><a href="/dokter">Spesialis Dokter</a></li>
             @if (Auth::user()->role_id == 1)
             <li><a href="{{ route('dashboard_admin') }}">Dashboard</a></li>
             @endif
