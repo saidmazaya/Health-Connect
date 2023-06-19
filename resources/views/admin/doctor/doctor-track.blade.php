@@ -23,11 +23,11 @@
                             <div class="table-responsive">
                                 <div class="mb-3">
                                     @if ($user->specialist->id == 1)
-                                    <a href="#" class="fs-3 text-decoration-none">Dokter : dr.{{ $user->name }}</a> <br>
+                                    <a href="{{ route('profil.show', $user->username) }}" class="fs-3 text-decoration-none">Dokter : dr.{{ $user->name }}</a> <br>
                                     @elseif($user->specialist->id == 2)
-                                    <a href="#" class="fs-3 text-decoration-none">Dokter : dr.{{ $user->name }}</a> <br>
+                                    <a href="{{ route('profil.show', $user->username) }}" class="fs-3 text-decoration-none">Dokter : dr.{{ $user->name }}</a> <br>
                                     @else
-                                    <a href="#" class="fs-3 text-decoration-none">Dokter : dr.{{ $user->name }} {{ $user->specialist->gelar }}</a> <br>
+                                    <a href="{{ route('profil.show', $user->username) }}" class="fs-3 text-decoration-none">Dokter : dr.{{ $user->name }} {{ $user->specialist->gelar }}</a> <br>
                                     @endif
                                     <h4 class="my-3 fs-4">Track Record : </h4>
                                 </div>

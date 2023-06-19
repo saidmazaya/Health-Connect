@@ -22,7 +22,7 @@
                             </div>
                             <div class="table-responsive">
                                 <div class="mb-3">
-                                    <a href="#" class="fs-3 text-decoration-none">User : {{ $user->name }}</a> <br>
+                                    <a href="{{ route('profil.show', $user->username) }}" class="fs-3 text-decoration-none">User : {{ $user->name }}</a> <br>
                                     <h4 class="my-3 fs-4">Track Record : </h4>
                                 </div>
 

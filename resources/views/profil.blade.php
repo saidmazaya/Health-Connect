@@ -79,7 +79,7 @@
                     </div>
 
                     <div>
-                      {{ Str::limit($data->content, 150, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}">Read More...</a>
+                      {{ Str::limit($data->content, 80, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}">Read More...</a>
                     </div>
                     @php
                     $voteUp = DB::table('votes')
@@ -105,6 +105,7 @@
                       ->orderBy('name')
                       ->get();
                       @endphp
+                      @if (Auth::user()->id == $data->user->id)
                       <select name="category_id" id="category" required>
                         @if ($data->category != '')
                         <option value="{{ $data->category->id }}">{{ $data->category->name }}</option>
@@ -116,6 +117,7 @@
                         @endforeach
                       </select>
                       <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                      @endif
                     </form>
                   </div>
                   <hr>
