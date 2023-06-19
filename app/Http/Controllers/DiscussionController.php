@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Vote;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Response;
 use App\Models\Discussion;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DiscussionCreateRequest;
 
 class DiscussionController extends Controller
 {
@@ -43,7 +46,9 @@ class DiscussionController extends Controller
      */
     public function create()
     {
-        $category = Category::select('id', 'name')->get();
+        $category = Category::select('id', 'name')
+            ->orderBy('name')
+            ->get();
 
         return view('create', compact('category'));
     }
@@ -51,11 +56,13 @@ class DiscussionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DiscussionCreateRequest $request)
     {
-        $article = Article::create($request->all());
+        $user = User::findOrFail($request->author_id);
+        $request['slug'] = $user->username . '_' . Str::slug($request->title, '-') . '-' . rand(1000000, 9999999);
+        $discussion = Discussion::create($request->all());
 
-        return redirect()->back()->with('message', 'Diskusi Berhasil Dibuat');
+        return redirect(route('home'))->with('message', 'Diskusi Berhasil Dibuat');
     }
 
     /**

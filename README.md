@@ -40,7 +40,7 @@ php artisan migrate
 php artisan storage:link
 ```
 Edit the `.env` file and set the `FILESYSTEM_DISK` to `public`, if dont work try 
-upload photo and try `storage:link` again
+upload photo and try `php artisan storage:link` again
 
 ### 7. Avoid Cache (If There Some Error)
 ```shell
