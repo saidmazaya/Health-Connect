@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class InformationController extends Controller
@@ -11,7 +12,14 @@ class InformationController extends Controller
      */
     public function index()
     {
-        //
+        $article = Article::with(['category', 'user'])
+            ->whereHas('user', function ($query) {
+                $query->where('role_id', 1);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+        return view('informasi', compact('article'));
     }
 
     /**
@@ -33,9 +41,17 @@ class InformationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($slug)
     {
-        //
+        $article = Article::with(['user', 'category'])
+            ->where('slug', $slug)
+            ->first();
+
+        if ($article) {
+            return view('detail-info', compact('article'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
