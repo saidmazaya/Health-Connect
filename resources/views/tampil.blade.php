@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <div class="container mt-4">
+    <div class="container mt-4" data-aos>
 
         <hr>
 
@@ -43,7 +43,7 @@
             <hr>
         </div>
         @endforeach
-        {{ $discussion->links() }}
+        {{ $discussion->withQueryString()->links() }}
 
     </div>
 
@@ -76,7 +76,7 @@
 
         </div>
         @endforeach
-        {{ $article->links() }}
+        {{ $article->withQueryString()->links() }}
     </div>
     {{-- Artikel end --}}
 

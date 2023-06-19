@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vote;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Response;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
@@ -42,7 +43,9 @@ class DiscussionController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::select('id', 'name')->get();
+
+        return view('create', compact('category'));
     }
 
     /**
@@ -50,7 +53,9 @@ class DiscussionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = Article::create($request->all());
+
+        return redirect()->back()->with('message', 'Diskusi Berhasil Dibuat');
     }
 
     /**

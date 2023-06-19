@@ -3,12 +3,12 @@
 @section('title', 'Diskusi')
 
 @section('konten')
-    
+
 <section class="breadcrumbs">
     <div class="container">
 
     </div>
-  </section>
+</section>
 
 <div class="container-fluid page-body-wrapper mt-4">
     <div class="main-panel">
@@ -22,23 +22,23 @@
                                 <div class="form-group mb-3">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" id="title" name="title">
-                                    
+
                                 </div>
-                                
+
                                 <div class="form-group mb-3">
                                     <label for="content">Content</label>
                                     <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
-                                    
+
                                 </div>
-                                
+
                                 <input type="hidden" name="author_id" value="">
                                 <div class="form-group mb-3">
                                     <label for="category">Category</label>
                                     <select name="category_id" id="category" class="form-select" required>
                                         <option value="">Select One</option>
-                                        
+
                                     </select>
-                                    
+
                                 </div>
                                 <button type="submit" class="btn btn-primary me-2">Publish</button>
                                 <a href="" class="btn btn-outline-secondary">Cancel</a>
@@ -55,6 +55,6 @@
     <div class="container">
 
     </div>
-  </section>
+</section>
 
 @endsection
