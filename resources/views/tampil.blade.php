@@ -1,102 +1,89 @@
 @extends('layout.home')
 
-@section('title', 'Diskusi')
+@section('title', 'Search')
 
 @section('konten')
-    
+
 <main id="main">
 
-<section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-        <i>2 Diskusi Ditemukan</i>
-    </div>
-</section>
-
-<div class="container mt-4">
-    
-<hr>
-   
-{{-- diskusi  --}}
-
-    <div style="margin-left: 12px" class="container">
-        <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-        <div>
-            <b>Contoh Title</b>
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <i>{{ $discussion->total() }} Diskusi Ditemukan</i>
         </div>
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
-        </div>
-        <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-        <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-        <a class="btn"><i class="bi bi-heart-pulse"> Hati</i></a>
-        <a class="btn"><i class="bi bi-flag"> Report</i></a>
-        <hr>    
+    </section>
 
-    </div>
+    <div class="container mt-4">
 
-    <div style="margin-left: 12px" class="container">
-        <p style="font-size: 20px" class="bi bi-person-circle"> <b>Nama</b> <i>3 mei 2022</i> </p>
-        <div>
-            <b>Contoh Title</b>
-        </div>
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
-        </div>
-        <a class="btn"><i class="bi bi-arrow-up">100</i></a>
-        <a class="btn"><i class="bi bi-arrow-down">10</i></a>
-        <a class="btn"><i class="bi bi-heart-pulse"> Jantung</i></a>
-        <a class="btn"><i class="bi bi-flag"> Report</i></a>
         <hr>
-    </div> 
-</div>
 
-{{-- diskusi end  --}}
+        {{-- diskusi --}}
 
-
-<section id="breadcrumbs" class="breadcrumbs">
-    <div class="container">
-        <i>2 Artikel Ditemukan</i>
-    </div>
-</section>
-
-<div class="container mt-4">
-    
-    <hr>
-       
-    {{-- Artikel  --}}
-    
-        <div id="artikel" style="margin-left: 12px" class="container">
-            <p style="font-size: 20px" class="bi bi-person-circle"> <b>Admin</b> <i>3 mei 2022</i> </p>
-            <div>
-                <b>Contoh Title</b>
-            </div>
-            <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
-            </div>
-            <a class="btn"><i class="bi bi-heart-pulse"> Jantung</i></a>
-            <hr>    
-    
-        </div>
-    
+        @foreach ($discussion as $data)
         <div style="margin-left: 12px" class="container">
-            <p style="font-size: 20px" class="bi bi-person-circle"> <b>Admin</b> <i>3 mei 2022</i> </p>
+            <p style="font-size: 20px" class="bi bi-person-circle"> <a href="#"><b>{{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
             <div>
-                <b>Contoh Title</b>
+                <b>{{ $data->title }}</b>
             </div>
             <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dolorem architecto veritatis molestiae voluptatum ducimus sequi corrupti, ipsa error libero ex nisi reiciendis nemo similique, sed atque fugit neque quaerat!
+                {{ Str::limit(strip_tags($data->content), 150, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}">Read More...</a>
             </div>
-            <a class="btn"><i class="bi bi-heart-pulse"> Jantung</i></a>
+            @php
+            $voteUp = DB::table('votes')
+            ->where('discussion_id', $data->id)
+            ->where('type', 'Upvote')
+            ->count();
+            $voteDown = DB::table('votes')
+            ->where('discussion_id', $data->id)
+            ->where('type', 'Downvote')
+            ->count();
+            @endphp
+            <a class="btn"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
+            <a class="btn"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
+            <a class="btn"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
             <hr>
-        </div> 
-    </div>
-    
-    {{-- Artikel end  --}}
+        </div>
+        @endforeach
+        {{ $discussion->links() }}
 
-<section id="breadcrumbs" class="breadcrumbs">
-  <div class="container">
-  </div>
-</section>
-    
-    </main>
+    </div>
+
+    {{-- diskusi end --}}
+
+
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <i>{{ $article->total() }} Artikel Ditemukan</i>
+        </div>
+    </section>
+
+    <div class="container mt-4">
+
+        <hr>
+
+        {{-- Artikel --}}
+
+        @foreach ($article as $data)
+        <div id="artikel" style="margin-left: 12px" class="container">
+            <p style="font-size: 20px" class="bi bi-person-circle"> <b>Admin HTC</b> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
+            <div>
+                <b>{{ $data->title }}</b>
+            </div>
+            <div>
+                {{ Str::limit(strip_tags($data->content), 150, '...') }} <a href="#">Read More...</a>
+            </div>
+            <a class="btn"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
+            <hr>
+
+        </div>
+        @endforeach
+        {{ $article->links() }}
+    </div>
+    {{-- Artikel end --}}
+
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+        </div>
+    </section>
+
+</main>
 @endsection

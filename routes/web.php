@@ -20,11 +20,14 @@ use App\Http\Controllers\ReportResponseController;
 use App\Http\Controllers\DiscussionAdminController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\DoctorAdminController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportDiscussionController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpecialistAdminController;
 use App\Http\Controllers\VoteDiscussionController;
 use App\Http\Controllers\VoteResponseController;
+use App\Models\ReportDiscussion;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +102,7 @@ Route::post('/reset-password', function (Request $request) {
 // User Route Start
 Route::get('/', function () {
     $discussion = Discussion::where('status', 'Published')
+        ->orderBy('created_at', 'desc')
         ->get();
 
     return view('index', compact('discussion'));
@@ -116,6 +120,7 @@ Route::get('/forum', function () {
 });
 
 Route::resource('/kategori', CategoryController::class);
+Route::get('/kategori/{slug}', [CategoryController::class, 'show'])->name('kategori.detail');
 
 Route::resource('/diskusi', DiscussionController::class);
 
@@ -126,6 +131,12 @@ Route::get('/vote-response-up/{id}', [VoteResponseController::class, 'voteUp'])-
 Route::get('/vote-response-down/{id}', [VoteResponseController::class, 'voteDown'])->name('vote-response.down')->middleware('auth');
 
 Route::resource('/response', ResponseController::class)->only(['store', 'destroy']);
+
+Route::get('/search', [SearchController::class, 'searchBar'])->name('search');
+
+Route::post('/report-discussion', [ReportController::class, 'ReportDiscussion'])->name('report.discussion');
+Route::post('/report-response', [ReportController::class, 'ReportResponse'])->name('report.response');
+
 
 Route::get('/informasi', function () {
     return view('informasi');
