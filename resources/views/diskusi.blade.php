@@ -23,7 +23,7 @@
 
         @foreach ($discussion as $data)
         <div style="margin-left: 12px" class="container">
-            <p style="font-size: 20px" class="bi bi-person-circle"> <a href="#"><b>{{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
+            <p style="font-size: 20px" class="bi bi-person-circle"> <a href="{{ route('profil.show', $data->user->username) }}"><b>{{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
             <div>
                 <b>{{ $data->title }}</b>
             </div>

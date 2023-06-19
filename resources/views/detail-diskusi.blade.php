@@ -67,9 +67,9 @@
           <div class="col-lg-4">
             <div class="portfolio-info">
               @if ($discussion->user->image != null)
-              <h3><img style="border-radius: 1000px;height:50px;width:50px" src="{{ asset('storage/photo/'.$discussion->user->image) }}" alt=""><a href="#"> {{ $discussion->user->name }}</a></h3>
+              <h3><img style="border-radius: 1000px;height:50px;width:50px" src="{{ asset('storage/photo/'.$discussion->user->image) }}" alt=""><a href="{{ route('profil.show', $discussion->user->username) }}"> {{ $discussion->user->name }}</a></h3>
               @else
-              <h3><img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt=""><a href="#"> {{ $discussion->user->name }}</a></h3>
+              <h3><img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $discussion->user->username) }}"> {{ $discussion->user->name }}</a></h3>
               @endif
               <ul>
                 <li>Kategori Pertanyaan: <a href="{{ route('kategori.detail', $discussion->category->slug) }}" class="btn btn-outline-primary">{{ $discussion->category->name }}</a> </li>
@@ -136,9 +136,10 @@
       @foreach ($discussion->comments->where('status', '!=', 'Deleted') as $data)
       {{-- kalau user tidak memakai foto profil --}}
       @if ($data->user->image != null)
-      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{
+        $data->created_at->format('d M, Y') }}</i>
       @else
-      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a><i>{{ $data->created_at->format('d M, Y') }}</i>
 
       @if (Auth::check())
       @if (Auth::user()->id == $data->user->id)
@@ -231,9 +232,10 @@
       <i class="bi bi-arrow-return-right"> Reply to {{ $data->parent->user->name }}</i>
       <div style="margin-left: 15px" class="container">
         @if ($data->user->image != null)
-        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{
+          $data->created_at->format('d M, Y') }}</i>
         @else
-        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><b> {{ $data->user->name }}</b> <i>{{ $data->created_at->format('d M, Y') }}</i>
+        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i>
 
         @if (Auth::check())
         @if (Auth::user()->id == $data->user->id)
