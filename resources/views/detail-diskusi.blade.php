@@ -28,6 +28,7 @@
             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" {{ $userReportDis ? 'disabled' : '' }}>
               <a><i class="{{ $userReportDis ? 'bi bi-check-circle' : 'bi bi-flag' }}"> Report</i></a>
             </button>
+            @if (Auth::check())
             <form action="{{ route('report.discussion') }}" method="POST" class="dropdown-menu p-4">
               @csrf
               <div><i>Kenapa Anda Report Diskusi Ini</i></div>
@@ -42,6 +43,7 @@
             <div class="alert alert-success mt-3" role="alert">
               {{ session('message') }}
             </div>
+            @endif
             @endif
 
             {{-- report button end --}}
@@ -162,6 +164,7 @@
 
       {{-- reply button --}}
 
+      @if (Auth::check())
       <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
         <a><i class="bi bi-chat"> Reply</i></a>
       </button>
@@ -177,12 +180,14 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      @endif
 
       {{-- reply button end --}}
 
 
       {{-- report button --}}
 
+      @if (Auth::check())
       @php
       $userReportRes = Auth::check() ? $data->report->where('user_id', Auth::user()->id)->first() : null;
       @endphp
@@ -199,6 +204,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      @endif
 
       {{-- report button end --}}
 
@@ -236,6 +242,7 @@
         <a class="btn {{ $userDownVote ? ' text-primary' : '' }}" href="{{ route('vote-response.down', $data->id) }}"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
         {{-- report button --}}
 
+        @if (Auth::check())
         @php
         $userReportRes = Auth::check() ? $data->report->where('user_id', Auth::user()->id)->first() : null;
         @endphp
@@ -252,6 +259,7 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        @endif
 
         {{-- report button end --}}
         <hr>

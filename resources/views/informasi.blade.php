@@ -26,7 +26,7 @@
             <i class="bi bi-info-lg"></i>
           </div>
           <h4><a href="{{ route('informasi.show', $data->slug) }}">{{ $data->title }}</a></h4>
-          <p>{{ $data->description }}</p>
+          <p>{{ Str::limit($data->description, 100, '...') }}</p>
         </div>
       </div>
       @endforeach

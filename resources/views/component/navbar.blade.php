@@ -16,7 +16,7 @@
         <li><a class="nav-link scrollto" href="/forum">Forum Diskusi</a></li>
         <li><a class="nav-link scrollto" href="/informasi">Informasi</a></li>
         <li><a class="nav-link scrollto o" href="/about">About</a></li>
-        <li><a class="nav-link scrollto o" href="/create">Create Discussion</a></li>
+        <li><a class="nav-link scrollto o" href="{{ route('diskusi.create') }}">Create Discussion</a></li>
         <li class="dropdown"><a href="#"><span><i class="bi bi-person-circle" style="font-size: 20px"></i></span> <i class="bi bi-chevron-down"></i></a>
           <ul>
             <li><a href="/profil/tes">{{ Auth::user()->name }}</a></li>
