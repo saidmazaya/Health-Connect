@@ -35,7 +35,7 @@
                                 @php
                                 $reportCountDiscuss = DB::table('report_discussions')->where('discussion_id', $data->id)->count();
                                 @endphp
-                                <a href="#" class="text-decoration-none">Title : {{ $data->title }}</a>
+                                <a href="{{ route('diskusi.show', $data->slug) }}" class="text-decoration-none">Title : {{ $data->title }}</a>
                                 <p>Content : {{ Str::limit($data->content, 50, '...') }}</p>
                                 <p class="mb-3">Report : {{ $reportCountDiscuss }}</p>
                                 @endforeach
@@ -50,7 +50,7 @@
                                 @php
                                 $reportCountResponse = DB::table('report_responses')->where('response_id', $data->id)->count();
                                 @endphp
-                                <a href="#" class="text-decoration-none">Discussion Title : {{ $data->discussion->title }}</a>
+                                <a href="{{ route('diskusi.show', $data->discussion->slug) }}" class="text-decoration-none">Discussion Title : {{ $data->discussion->title }}</a>
                                 <p class="mb-3">Content : {{ Str::limit($data->content, 50, '...') }}</p>
                                 <p class="mb-3">Report : {{ $reportCountResponse }}</p>
                                 @endforeach

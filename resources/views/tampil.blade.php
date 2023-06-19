@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <div class="container mt-4" data-aos>
+    <div class="container mt-4" data-aos="fade-up">
 
         <hr>
 

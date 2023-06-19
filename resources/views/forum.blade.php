@@ -22,19 +22,21 @@
         </ol> --}}
       </div>
       <p>
+        <hr>
         {{-- Forum - START --}}
         @foreach ($parent as $data)
-      <h4 class="mb-3">{{ $data->name }}</h4>
-      <ul class="mb-5">
-        @foreach ($category->where('type_id', $data->id) as $item)
-        <li><a href="{{ route('kategori.detail', $item->slug) }}">
-            <h5>{{ $item->name }}<h5>
-          </a></li>
-        @endforeach
-      </ul>
+      <h4 class="mb-3"><i>{{ $data->name }}</i></h4>
+
+      @foreach ($category->where('type_id', $data->id) as $item)
+      <a href="{{ route('kategori.detail', $item->slug) }}">
+        <h5>{{ $item->name }}<h5>
+      </a>
+      @endforeach
+      <hr>
       @endforeach
       {{ $parent->links() }}
       {{-- Forum - END --}}
+
       </p>
     </div>
   </section>

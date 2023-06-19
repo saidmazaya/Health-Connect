@@ -20,6 +20,7 @@ use App\Http\Controllers\ReportResponseController;
 use App\Http\Controllers\DiscussionAdminController;
 use App\Http\Controllers\DiscussionController;
 use App\Http\Controllers\DoctorAdminController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportDiscussionController;
@@ -123,7 +124,10 @@ Route::get('/forum', function () {
 Route::resource('/kategori', CategoryController::class);
 Route::get('/kategori/{slug}', [CategoryController::class, 'show'])->name('kategori.detail');
 
-Route::resource('/diskusi', DiscussionController::class);
+Route::get('/diskusi/create', [DiscussionController::class, 'create'])->name('diskusi.create')->middleware('auth');
+Route::post('/diskusi', [DiscussionController::class, 'store'])->name('diskusi.store')->middleware('auth');
+
+Route::resource('/diskusi', DiscussionController::class)->only(['index', 'show']);
 
 Route::get('/vote-up/{id}', [VoteDiscussionController::class, 'voteUp'])->name('vote.up')->middleware('auth');
 Route::get('/vote-down/{id}', [VoteDiscussionController::class, 'voteDown'])->name('vote.down')->middleware('auth');
@@ -131,29 +135,19 @@ Route::get('/vote-down/{id}', [VoteDiscussionController::class, 'voteDown'])->na
 Route::get('/vote-response-up/{id}', [VoteResponseController::class, 'voteUp'])->name('vote-response.up')->middleware('auth');
 Route::get('/vote-response-down/{id}', [VoteResponseController::class, 'voteDown'])->name('vote-response.down')->middleware('auth');
 
-Route::resource('/response', ResponseController::class)->only(['store', 'destroy']);
+Route::resource('/response', ResponseController::class)->only(['store', 'destroy'])->middleware('auth');
 
 Route::get('/search', [SearchController::class, 'searchBar'])->name('search');
 
-Route::post('/report-discussion', [ReportController::class, 'ReportDiscussion'])->name('report.discussion');
-Route::post('/report-response', [ReportController::class, 'ReportResponse'])->name('report.response');
+Route::post('/report-discussion', [ReportController::class, 'ReportDiscussion'])->name('report.discussion')->middleware('auth');
+Route::post('/report-response', [ReportController::class, 'ReportResponse'])->name('report.response')->middleware('auth');
 
 Route::resource('/informasi', InformationController::class)->only(['index', 'show']);
 
-Route::get('/dokter', function () {
-    return view('dokter');
-});
-
-Route::get('/informasi/{id}', function () {
-    return view('detail-info');
-});
+Route::resource('/dokter', DoctorController::class)->only(['index', 'show']);
 
 Route::get('/profil/{username}', function () {
     return view('profil');
-});
-
-Route::get('/tampil/{id}', function () {
-    return view('tampil');
 });
 
 Route::get('/profil/{username}', function () {

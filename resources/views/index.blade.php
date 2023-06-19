@@ -28,6 +28,11 @@
     <a href="/diskusi" class="btn-get-started scrollto">Diskusi</a>
   </div>
   @endauth
+  @if (session('message'))
+  <div class="alert alert-success mt-3" role="alert">
+    {{ session('message') }}
+  </div>
+  @endif
   <div class="row icon-boxes">
 
     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
