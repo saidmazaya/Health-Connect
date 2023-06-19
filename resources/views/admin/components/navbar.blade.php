@@ -70,7 +70,7 @@
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <div class="dropdown-header text-center">
                         @if (Auth::user()->image != null)
-                        <div class="image-container" style="margin-left: 60px">
+                        <div class="image-container" style="margin-left: 44px">
                             <img src="{{ asset('storage/photo/'.Auth::user()->image) }}" class="rounded-image">
                         </div>
                         @else

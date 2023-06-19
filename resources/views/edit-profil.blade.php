@@ -78,7 +78,7 @@
         </div>
 
         <div class="mb-3 d-flex justify-content-end">
-            <a href="" class="btn btn-secondary">Cancel</a>&nbsp;
+            <a href="{{ route('profil.show', Auth::user()->username) }}" class="btn btn-secondary">Cancel</a>&nbsp;
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>

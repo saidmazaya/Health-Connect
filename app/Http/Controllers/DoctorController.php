@@ -44,13 +44,9 @@ class DoctorController extends Controller
             ->whereHas('user', function ($query) {
                 $query->where('role_id', 3);
             })
-            ->findOrFail($id);
+            ->find($id);
 
-        if ($specialist) {
-            return view('list-dokter', compact('specialist'));
-        } else {
-            abort(404);
-        }
+        return view('list-dokter', compact('specialist'));
     }
 
     /**

@@ -20,7 +20,7 @@
 
         @foreach ($discussion as $data)
         <div style="margin-left: 12px" class="container">
-            <p style="font-size: 20px" class="bi bi-person-circle"> <a href="#"><b>{{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
+            <p style="font-size: 20px" class="bi bi-person-circle"> <a href="{{ route('profil.show', $data->user->username) }}"><b>{{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i> </p>
             <div>
                 <b>{{ $data->title }}</b>
             </div>
@@ -39,7 +39,7 @@
             @endphp
             <a class="btn"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
             <a class="btn"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
-            <a class="btn"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
+            <a class="btn" href="{{ route('kategori.detail', $data->category->slug) }}"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
             <hr>
         </div>
         @endforeach
@@ -69,9 +69,9 @@
                 <b>{{ $data->title }}</b>
             </div>
             <div>
-                {{ Str::limit(strip_tags($data->content), 150, '...') }} <a href="#">Read More...</a>
+                {{ Str::limit(strip_tags($data->content), 150, '...') }} <a href="{{ route('informasi.show', $data->slug) }}">Read More...</a>
             </div>
-            <a class="btn"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
+            <a class="btn" href="{{ route('kategori.detail', $data->category->slug) }}"><i class="bi bi-heart-pulse"> {{ $data->category->name }}</i></a>
             <hr>
 
         </div>
