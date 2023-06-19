@@ -151,6 +151,7 @@ Route::resource('/informasi', InformationController::class)->only(['index', 'sho
 Route::resource('/dokter', DoctorController::class)->only(['index', 'show']);
 
 Route::resource('/profil', ProfileController::class)->middleware('auth');
+Route::delete('/profile/{id}', [ProfileController::class, 'deleteProfile'])->name('profile.delete-image');
 // User Route End
 
 

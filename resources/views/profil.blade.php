@@ -26,7 +26,7 @@
                   {{ session('message') }}
                 </div>
                 @endif
-                About
+                <b>About</b>
                 <p>
                   @if ($user->about == '')
                   -

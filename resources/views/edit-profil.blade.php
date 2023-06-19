@@ -12,55 +12,104 @@
     <div class="container">
 
     </div>
-  </section>
+</section>
 
-    <div class="d-flex justify-content-center align-items-center vh-100 mt-3 " data-aos="fade-up">
-        <form class="shadow w-50 p-3" action="" method="post" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <h4 class="display-4  fs-1">Profile Information</h4><br>
-            <div class="mb-3">
-                <label class="form-label">Photo : </label>
-                -                
-                <input type="file" class="form-control mt-2" name="photo" id="photo">
-                <button class="btn btn-primary mt-3" type="submit">Update</button>
-                <button class="btn btn-danger mt-3" type="submit" form="_delete">Remove</button>               
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ Auth::user()->name }}">                
-            </div>      
-
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email" value="{{ Auth::user()->email }}">   
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Bio</label>
-                <input type="text" class="form-control" name="bio" id="bio" value="{{ Auth::user()->bio }}">    
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">About</label>
-                <input type="text" class="form-control" name="bio" id="bio" value="{{ Auth::user()->about }}">    
-            </div>
-
-            <div class="mb-3 d-flex justify-content-end">
-                <a href="" class="btn btn-secondary">Cancel</a>&nbsp;
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </form>
-    </div>
-    <form id="_delete" action="" method="post">
+<div class="d-flex justify-content-center align-items-center vh-100 mt-3 " data-aos="fade-up">
+    <form class="shadow w-50 p-3" action="{{ route('profil.update', Auth::user()->id) }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('DELETE')
-    </form>
+        @method('PUT')
+        <h4 class="display-4  fs-1">Profile Information</h4><br>
+        <div class="mb-3">
+            <label class="form-label">Photo : </label>
+            @if (Auth::user()->image != null)
+            <div class="image-container">
+                <img src="{{ asset('storage/photo/'.Auth::user()->image) }}" class="rounded-image">
+            </div>
+            @else
+            -
+            @endif
 
-    <section class="breadcrumbs">
-        <div class="container">
-    
+            <input type="file" class="form-control mt-2" name="photo" id="photo">
+            <button class="btn btn-primary mt-3" type="submit">Update</button>
+            <button class="btn btn-danger mt-3" type="submit" form="_delete">Remove</button>
+            @if ($errors->has('photo'))
+            <div class="text-danger mt-2">
+                @foreach ($errors->get('photo') as $error)
+                <p>{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
         </div>
-      </section>
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" value="{{ Auth::user()->name }}">
+            @if ($errors->has('name'))
+            <div class="text-danger mt-2">
+                @foreach ($errors->get('name') as $error)
+                <p>{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Bio</label>
+            <input type="text" class="form-control" name="bio" id="bio" value="{{ Auth::user()->bio }}">
+            @if ($errors->has('bio'))
+            <div class="text-danger mt-2">
+                @foreach ($errors->get('bio') as $error)
+                <p>{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">About</label>
+            <input type="text" class="form-control" name="about" id="about" value="{{ Auth::user()->about }}">
+            @if ($errors->has('about'))
+            <div class="text-danger mt-2">
+                @foreach ($errors->get('about') as $error)
+                <p>{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
+        </div>
+
+        <div class="mb-3 d-flex justify-content-end">
+            <a href="" class="btn btn-secondary">Cancel</a>&nbsp;
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+<form id="_delete" action="{{ route('profile.delete-image', Auth::user()->id) }}" method="post">
+    @csrf
+    @method('DELETE')
+</form>
+
+<section class="breadcrumbs">
+    <div class="container">
+
+    </div>
+</section>
 @endsection
+@push('css')
+<style>
+    .rounded-image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /* Membuat gambar menjadi bentuk bulat */
+    }
+
+    .image-container {
+        width: 100px;
+        /* Lebar yang diinginkan */
+        height: 100px;
+        /* Tinggi yang diinginkan */
+        overflow: hidden;
+    }
+</style>
+@endpush

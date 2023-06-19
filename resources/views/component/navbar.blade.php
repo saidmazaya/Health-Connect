@@ -22,7 +22,6 @@
             <li><a href="{{ route('profil.show', Auth::user()->username) }}">{{ Auth::user()->name }}</a></li>
             <li><a href="/kategori">Kategori</a></li>
             <li><a href="/dokter">Spesialis Dokter</a></li>
-            <li><a href="#">Drop Down 3</a></li>
             @if (Auth::user()->role_id == 1)
             <li><a href="{{ route('dashboard_admin') }}">Dashboard</a></li>
             @endif
