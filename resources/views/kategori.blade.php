@@ -52,7 +52,7 @@
         @else
             @foreach ($paginator as $category)
                 <h6>
-                    <a class="fs-6" href="#">{{ $category->name }}</a>
+                    <a class="fs-6" href="{{ route('kategori.detail', $category->slug) }}">{{ $category->name }}</a>
                 </h6>
             @endforeach
         @endif
