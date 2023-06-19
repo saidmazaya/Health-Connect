@@ -1,6 +1,6 @@
 @extends('layout.home')
 
-@section('title', 'Search')
+@section('title', 'Detail Kategori')
 
 @section('konten')
 

@@ -26,7 +26,10 @@
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label text-black" for="username">Username</label>
-                  <input type="text" id="username" class="form-control" name="username" value="@" required>
+                  <div class="input-group">
+                    <span style="color: black" class="input-group-text">@</span>
+                    <input type="text" id="username" class="form-control" name="username" required>
+                  </div>
                   @if ($errors->has('username'))
                   <div class="text-danger mt-2">
                     @foreach ($errors->get('username') as $error)
@@ -110,14 +113,14 @@
       }
   </script>
 
-  <script>
+  {{-- <script>
     document.getElementById("username").addEventListener("input", function(event) {
       var value = this.value;
       if (value.indexOf("@") === -1) {
           this.value = "@" + value; // Tambahkan karakter '@' jika tidak ada
       }
   });
-  </script>
+  </script> --}}
 
 </section>
 @endsection

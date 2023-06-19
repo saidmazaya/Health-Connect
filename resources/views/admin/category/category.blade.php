@@ -56,7 +56,7 @@
                                             <td>{{ $categoryUseDiscussCount }}</td>
                                             <td>{{ $categoryUseCount }}</td>
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info">Detail</a>
+                                                <a href="{{ route('kategori.detail', $data->slug) }}" class="btn-sm text-decoration-none btn-info">Detail</a>
                                                 | <a href="{{ route('category.edit', $data->slug) }}" class="btn-sm text-decoration-none btn-primary">Edit</a>
                                                 | <form class="d-inline" action="{{ route('category.destroy', $data->id) }}" method="POST" id="deleteForm{{ $data->id }}" data-category-id="{{ $data->id }}" data-related-articles="{{ $categoryUseCount }}" data-related-discussion="{{ $categoryUseDiscussCount }}">
                                                     @csrf

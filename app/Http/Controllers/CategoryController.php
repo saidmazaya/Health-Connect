@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Category;
+use App\Models\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
@@ -50,5 +52,28 @@ class CategoryController extends Controller
         );
 
         return view('kategori', compact('paginator', 'letters', 'currentLetter'));
+    }
+
+    public function show($slug)
+    {
+
+        $category = Category::where('slug', $slug)->first();
+
+        $discussion = Discussion::with(['category', 'user'])
+            ->where('status', 'Published')
+            ->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category->slug);
+            })
+            ->orderBy('id', 'asc')
+            ->paginate(5);
+
+        $article = Article::with(['category', 'user'])
+            ->orderBy('id', 'asc')
+            ->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category->slug);
+            })
+            ->paginate(5);
+
+        return view('detail-category', compact('discussion', 'article'));
     }
 }

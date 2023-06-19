@@ -41,7 +41,9 @@ class ArticleAdminController extends Controller
      */
     public function create()
     {
-        $category = Category::select('id', 'name')->get();
+        $category = Category::select('id', 'name')
+            ->orderBy('name')
+            ->get();
 
         return view('admin.article.article-add', compact('category'));
     }
@@ -83,7 +85,7 @@ class ArticleAdminController extends Controller
     {
         $article = Article::with(['user', 'category'])
             ->where('slug', $slug)->first();
-        $category = Category::where('id', '!=', $article->category_id)->select('id', 'name')->get();
+        $category = Category::where('id', '!=', $article->category_id)->select('id', 'name')->orderBy('name')->get();
         return view('admin.article.article-edit', compact('article', 'category'));
     }
 
