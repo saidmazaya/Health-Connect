@@ -46,7 +46,7 @@
                                             <td>{{ $data->total_reports }}</td>
                                             <td>
                                                 <a href="{{ route('report-response.detail', $data->response_id) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-question"></i></a>
-                                                | <a href="#" class="btn-sm text-decoration-none btn-dark"><i class="fa-solid fa-circle-info"></i></a>
+                                                | <a href="{{ route('diskusi.show', $data->response->discussion->slug) }}" class="btn-sm text-decoration-none btn-dark"><i class="fa-solid fa-circle-info"></i></a>
                                                 | <form id="accept-form-{{ $data->response_id }}" action="{{ route('response-accept.report', $data->response_id) }}" data-status="Published" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('PUT')

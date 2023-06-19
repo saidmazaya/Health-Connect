@@ -3,12 +3,12 @@
 
     <h1 class="logo"><a href="/">Health Connect</a></h1>
     <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-    <form action="">
+    <form action="#" method="GET">
       <input type="text" style="border-radius: 4px; width: 6cm; padding: 4px" name="keyword" placeholder="Search...">
-                    <button type="submit" style="padding: 4px;">
-                        <i class="bi bi-search"></i>
-                    </button>
-      </form>
+      <button type="submit" style="padding: 4px;">
+        <i class="bi bi-search"></i>
+      </button>
+    </form>
     <nav id="navbar" class="navbar">
       <ul>
         @if (Auth::check())
@@ -23,6 +23,9 @@
             <li><a href="#">Drop Down 1</a></li>
             <li><a href="#">Drop Down 2</a></li>
             <li><a href="#">Drop Down 3</a></li>
+            @if (Auth::user()->role_id == 1)
+            <li><a href="{{ route('dashboard_admin') }}">Dashboard</a></li>
+            @endif
             <li><a href="/signout">Sign Out</a></li>
           </ul>
         </li>

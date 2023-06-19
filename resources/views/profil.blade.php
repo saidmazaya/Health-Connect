@@ -13,10 +13,10 @@
 
         </div>
       </section><!-- End Breadcrumbs -->
-      
+
      <section id="portfolio-details" class="portfolio-details" data-aos="fade-up">
         <div class="container">
-            <h3>Profil</h3>
+  
           <div class="row gy-4">
   
             <div class="col-lg-8">

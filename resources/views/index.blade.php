@@ -20,12 +20,12 @@
     @endguest
     @auth
     <div class="col-xl-7 col-lg-9 text-center">
-      <h1>Membantu dan Bertanya Mengenai Kesehatan</h1>
+      <h1>Solusi Kesehatan Modern Dalam Jangkauanmu</h1>
       <h2>Mulai Berdiskusi</h2>
     </div>
   </div>
   <div class="text-center">
-    <a href="/forum" class="btn-get-started scrollto">Diskusi</a>
+    <a href="/diskusi" class="btn-get-started scrollto">Diskusi</a>
   </div>
   @endauth
   <div class="row icon-boxes">
@@ -91,7 +91,7 @@
             </a>
             <div id="faq-list-{{ $data->id }}" class="collapse show" data-bs-parent=".faq-list">
               <p>
-                {{ Str::limit($data->content, 250, '...') }}
+                {{ Str::limit($data->content, 250, '...') }} <a href="{{ route('diskusi.show', $data->slug) }}" class="d-inline">Read more...</a>
               </p>
             </div>
           </li>
