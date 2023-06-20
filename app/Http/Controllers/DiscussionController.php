@@ -27,7 +27,10 @@ class DiscussionController extends Controller
             ->where('status', 'Published');
 
         if ($sortBy === 'votes') {
-            $query->leftJoin('votes', 'discussions.id', '=', 'votes.discussion_id')
+            $query->leftJoin('votes', function ($join) {
+                $join->on('discussions.id', '=', 'votes.discussion_id')
+                    ->where('votes.type', 'Upvote');
+            })
                 ->select('discussions.id', 'discussions.title', 'discussions.content', 'discussions.slug', 'discussions.created_at', 'discussions.updated_at', 'discussions.category_id', 'discussions.author_id', DB::raw('COUNT(votes.id) AS vote_count'))
                 ->groupBy('discussions.id', 'discussions.title', 'discussions.content', 'discussions.slug', 'discussions.created_at', 'discussions.updated_at', 'discussions.category_id', 'discussions.author_id')
                 ->orderBy('vote_count', 'desc');

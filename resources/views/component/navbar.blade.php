@@ -20,6 +20,7 @@
         <li class="dropdown"><a href="#"><span><i class="bi bi-person-circle" style="font-size: 20px"></i></span> <i class="bi bi-chevron-down"></i></a>
           <ul>
             <li><a href="{{ route('profil.show', Auth::user()->username) }}">{{ Auth::user()->name }}</a></li>
+            <li><a href="/diskusi">Diskusi</a></li>
             <li><a href="/kategori">Kategori</a></li>
             <li><a href="/dokter">Spesialis Dokter</a></li>
             @if (Auth::user()->role_id == 1)
