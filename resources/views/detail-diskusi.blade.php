@@ -131,15 +131,45 @@
     {{-- response --}}
 
 
+    {{-- Role Doctor --}}
     {{-- response dengan reply --}}
     <div style="margin-left: 12px" class="container">
-      @foreach ($discussion->comments->where('status', '!=', 'Deleted') as $data)
+      @php
+      $doctors = $discussion->comments->where('status', '!=', 'Deleted')->where('user.role_id', 3);
+      $nonDoctors = $discussion->comments->where('status', '!=', 'Deleted')->where('user.role_id', '!=', 3);
+      @endphp
+      @foreach ($doctors->sortByDesc(function($comment) {
+      return DB::table('vote_responses')
+      ->where('response_id', $comment->id)
+      ->where('type', 'Upvote')
+      ->count();
+      }) as $data)
+
+
       {{-- kalau user tidak memakai foto profil --}}
       @if ($data->user->image != null)
-      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{
-        $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+      @if ($data->user->specialist_id == 1)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      @elseif($data->user->specialist_id == 2)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
       @else
-      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a><i>{{ $data->created_at->format('d M, Y') }}</i>
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+      @endif
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+      @else
+      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+      @if ($data->user->specialist_id == 1)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      @elseif($data->user->specialist_id == 2)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+      @else
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+      @endif
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+      @endif
 
       @if (Auth::check())
       @if (Auth::user()->id == $data->user->id)
@@ -156,7 +186,222 @@
       @endif
 
       {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>{{ $data->user->name }}</b> <i>3 mei 2022</i> </p> --}}
+      <div class="mt-2">
+        {{ $data->content }}
+      </div>
+
+      @php
+      $voteUp = DB::table('vote_responses')
+      ->where('response_id', $data->id)
+      ->where('type', 'Upvote')
+      ->count();
+      $voteDown = DB::table('vote_responses')
+      ->where('response_id', $data->id)
+      ->where('type', 'Downvote')
+      ->count();
+      $userUpVote = Auth::check() ? $data->votes->where('user_id', Auth::user()->id)->where('type', 'Upvote')->first() : null;
+      $userDownVote = Auth::check() ? $data->votes->where('user_id', Auth::user()->id)->where('type', 'Downvote')->first() : null;
+      $voteCount = $data->votes->count();
+      @endphp
+      <a class="btn {{ $userUpVote ? ' text-primary' : '' }}" href="{{ route('vote-response.up', $data->id) }}"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
+      <a class="btn {{ $userDownVote ? ' text-primary' : '' }}" href="{{ route('vote-response.down', $data->id) }}"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
+
+      {{-- reply button --}}
+
+      @if (Auth::check())
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+        <a><i class="bi bi-chat"> Reply</i></a>
+      </button>
+      <form action="{{ route('response.store') }}" method="POST" class="dropdown-menu p-4">
+        @csrf
+        <div><i>Reply</i></div>
+        <div class="mb-3">
+          <input type="hidden" name="status" value="Published">
+          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+          <input type="hidden" name="discussion_id" value="{{ $discussion->id }}">
+          <input type="hidden" name="parent_id" value="{{ $data->id }}">
+          <textarea placeholder="Tambah Komentar......" name="content" id="content" cols="30" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
       @endif
+
+      {{-- reply button end --}}
+
+
+      {{-- report button --}}
+
+      @if (Auth::check())
+      @php
+      $userReportRes = Auth::check() ? $data->report->where('user_id', Auth::user()->id)->first() : null;
+      @endphp
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" {{ $userReportRes ? 'disabled' : '' }}>
+        <a><i class="{{ $userReportRes ? 'bi bi-check-circle' : 'bi bi-flag' }}"> Report</i></a>
+      </button>
+      <form action="{{ route('report.response') }}" method="POST" class="dropdown-menu p-4">
+        @csrf
+        <div><i>Kenapa Anda Report Response Ini</i></div>
+        <div class="mb-3">
+          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+          <input type="hidden" name="response_id" value="{{ $data->id }}">
+          <textarea placeholder="Alasan Report......" name="content" id="content" cols="30" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      @endif
+
+      {{-- report button end --}}
+
+
+      <hr>
+
+
+      @if ($data && count($data->replies) > 0)
+      @foreach ($data->replies->where('status', '!=', 'Deleted')->sortByDesc(function($data) {
+      return DB::table('vote_responses')
+      ->where('response_id', $data->id)
+      ->where('type', 'Upvote')
+      ->count();
+      }) as $data)
+      {{-- reply --}}
+      <i class="bi bi-arrow-return-right"> Reply to {{ $data->parent->user->name }}</i>
+      <div style="margin-left: 15px" class="container">
+        @if ($data->user->image != null)
+        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+        @else
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i> {{ $data->created_at->format('d M, Y') }}</i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @else
+        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+        @else
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i>{{ $data->created_at->format('d M, Y') }}</i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @endif
+
+        @if (Auth::check())
+        @if (Auth::user()->id == $data->user->id)
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+          <a><i class="bi bi-trash"></i></a>
+        </button>
+        <form class="dropdown-menu p-4" action="{{ route('response.destroy', $data->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <div><i>Apakah Anda Yakin Ingin Menghapus Ini?</i></div>
+          <button type="submit" class="btn btn-danger mt-2">Hapus</button>
+        </form>
+        @endif
+        @endif
+
+        <div class="mt-2">
+          {{ $data->content }}
+        </div>
+
+        @php
+        $voteUp = DB::table('vote_responses')
+        ->where('response_id', $data->id)
+        ->where('type', 'Upvote')
+        ->count();
+        $voteDown = DB::table('vote_responses')
+        ->where('response_id', $data->id)
+        ->where('type', 'Downvote')
+        ->count();
+        $userUpVote = Auth::check() ? $data->votes->where('user_id', Auth::user()->id)->where('type', 'Upvote')->first() : null;
+        $userDownVote = Auth::check() ? $data->votes->where('user_id', Auth::user()->id)->where('type', 'Downvote')->first() : null;
+        $voteCount = $data->votes->count();
+        @endphp
+        <a class="btn {{ $userUpVote ? ' text-primary' : '' }}" href="{{ route('vote-response.up', $data->id) }}"><i class="bi bi-arrow-up">{{ $voteUp }}</i></a>
+        <a class="btn {{ $userDownVote ? ' text-primary' : '' }}" href="{{ route('vote-response.down', $data->id) }}"><i class="bi bi-arrow-down">{{ $voteDown }}</i></a>
+        {{-- report button --}}
+
+        @if (Auth::check())
+        @php
+        $userReportRes = Auth::check() ? $data->report->where('user_id', Auth::user()->id)->first() : null;
+        @endphp
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" {{ $userReportRes ? 'disabled' : '' }}>
+          <a><i class="{{ $userReportRes ? 'bi bi-check-circle' : 'bi bi-flag' }}"> Report</i></a>
+        </button>
+        <form action="{{ route('report.response') }}" method="POST" class="dropdown-menu p-4">
+          @csrf
+          <div><i>Kenapa Anda Report Response Ini</i></div>
+          <div class="mb-3">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="response_id" value="{{ $data->id }}">
+            <textarea placeholder="Alasan Report......" name="content" id="content" cols="30" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        @endif
+
+        {{-- report button end --}}
+        <hr>
+      </div>
+      {{-- reply end --}}
+
+      @endforeach
+      @endif
+
+      @endforeach
+    </div>
+    {{-- response dengan reply end --}}
+
+    {{-- End Role Doctor --}}
+
+    {{-- Role Biasa --}}
+    {{-- response dengan reply --}}
+    <div style="margin-left: 12px" class="container">
+      @php
+      $doctors = $discussion->comments->where('status', '!=', 'Deleted')->where('user.role_id', 3);
+      $nonDoctors = $discussion->comments->where('status', '!=', 'Deleted')->where('user.role_id', '!=', 3);
+      @endphp
+      @foreach ($nonDoctors->sortByDesc(function($comment) {
+      return DB::table('vote_responses')
+      ->where('response_id', $comment->id)
+      ->where('type', 'Upvote')
+      ->count();
+      }) as $data)
+
+      {{-- kalau user tidak memakai foto profil --}}
+      @if ($data->user->image != null)
+      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      @else
+      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      @endif
+
+      @if (Auth::check())
+      @if (Auth::user()->id == $data->user->id)
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+        <a><i class="bi bi-trash"></i></a>
+      </button>
+      <form class="dropdown-menu p-4" action="{{ route('response.destroy', $data->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <div><i>Apakah Anda Yakin Ingin Menghapus Ini?</i></div>
+        <button type="submit" class="btn btn-danger mt-2">Hapus</button>
+      </form>
+      @endif
+      @endif
+
+      {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>{{ $data->user->name }}</b> <i>3 mei 2022</i> </p> --}}
       <div class="mt-2">
         {{ $data->content }}
       </div>
@@ -227,15 +472,42 @@
 
 
       @if ($data && count($data->replies) > 0)
-      @foreach ($data->replies->where('status', '!=', 'Deleted') as $data)
+      @foreach ($data->replies->where('status', '!=', 'Deleted')->sortByDesc(function($data) {
+      return DB::table('vote_responses')
+      ->where('response_id', $data->id)
+      ->where('type', 'Upvote')
+      ->count();
+      }) as $data)
       {{-- reply --}}
       <i class="bi bi-arrow-return-right"> Reply to {{ $data->parent->user->name }}</i>
       <div style="margin-left: 15px" class="container">
         @if ($data->user->image != null)
-        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{
-          $data->created_at->format('d M, Y') }}</i>
+        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
         @else
-        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i>
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i> {{ $data->created_at->format('d M, Y') }} </i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @else
+        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+        @else
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i>{{ $data->created_at->format('d M, Y') }}</i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @endif
 
         @if (Auth::check())
         @if (Auth::user()->id == $data->user->id)
@@ -251,7 +523,6 @@
         @endif
         @endif
 
-        @endif
         <div class="mt-2">
           {{ $data->content }}
         </div>
@@ -303,6 +574,7 @@
       @endforeach
     </div>
     {{-- response dengan reply end --}}
+    {{-- End Role Biasa --}}
 
     @else
     <div class="container mt-4">
@@ -353,13 +625,11 @@
       </div>
     </div>
     @else
-    <div class="row mt-4 container">
-      <div class="col-1 d-flex justify-content-start">
-        <img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt="">
-      </div>
-      <div class="col-11 d-flex justify-content-end">
-        <a href="/login">Response Now !!</a>
-      </div>
+    <div class="container">
+      <hr>
+      <img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt="">
+      <a href="/login">Login To make A Comment !!!</a>
+      <hr>
     </div>
     @endif
 

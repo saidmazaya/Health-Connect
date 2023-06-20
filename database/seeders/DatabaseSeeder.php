@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             ReportDiscussionSeeder::class,
             ReportResponseSeeder::class,
+            VoteSeeder::class,
+            VoteResponseSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
