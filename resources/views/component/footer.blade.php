@@ -12,7 +12,7 @@
                   Medan<br>
                   Indonesia <br><br>
                   <strong>Phone:</strong> +62 811 1111 1111<br>
-                  <strong>Email:</strong> healthconnect@gmail.com <br>
+                  <strong>Email:</strong> htc@gmail.com <br>
                 </p>
               </div>
     
@@ -25,9 +25,6 @@
                 <ul>
                   <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
                   <li><i class="bx bx-chevron-right"></i> <a href="/about">About us</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                 </ul>
               </div>
     
@@ -40,11 +37,8 @@
           {{-- <div class="me-md-auto text-center text-md-start">
           </div> --}}
           <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            <a href="https://www.instagram.com/gdsc.usu/" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/google-developer-student-clubs-universitas-sumatera-utara-9839bb193" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
           </div>
         </div>
       </footer><!-- End Footer -->
