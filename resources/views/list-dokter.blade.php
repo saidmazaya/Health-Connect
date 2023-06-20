@@ -30,7 +30,7 @@
             @elseif($data->specialist->id == 2)
             <h4><a href="{{ route('profil.show', $data->username) }}">dr.{{ $data->name }}</a></h4>
             @else
-            <h4><a href="{{ route('profil.show', $data->username) }}">dr.{{ $data->name }} {{ $data->specialist->name }}</a></h4>
+            <h4><a href="{{ route('profil.show', $data->username) }}">dr.{{ $data->name }} {{ $data->specialist->gelar }}</a></h4>
             @endif
             @if ($data->bio == '')
             -

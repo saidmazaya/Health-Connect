@@ -148,10 +148,28 @@
 
       {{-- kalau user tidak memakai foto profil --}}
       @if ($data->user->image != null)
-      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{
-        $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+      @if ($data->user->specialist_id == 1)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      @elseif($data->user->specialist_id == 2)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
       @else
-      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a><i>{{ $data->created_at->format('d M, Y') }}</i>
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+      @endif
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+      @else
+      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+      @if ($data->user->specialist_id == 1)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      @elseif($data->user->specialist_id == 2)
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+      @else
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+      @endif
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+      @endif
 
       @if (Auth::check())
       @if (Auth::user()->id == $data->user->id)
@@ -168,7 +186,6 @@
       @endif
 
       {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>{{ $data->user->name }}</b> <i>3 mei 2022</i> </p> --}}
-      @endif
       <div class="mt-2">
         {{ $data->content }}
       </div>
@@ -250,10 +267,32 @@
       <i class="bi bi-arrow-return-right"> Reply to {{ $data->parent->user->name }}</i>
       <div style="margin-left: 15px" class="container">
         @if ($data->user->image != null)
-        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>
-          {{ $data->created_at->format('d M, Y') }}</i>
+        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
         @else
-        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i>
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i> {{ $data->created_at->format('d M, Y') }}</i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @else
+        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+        @else
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i>{{ $data->created_at->format('d M, Y') }}</i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @endif
 
         @if (Auth::check())
         @if (Auth::user()->id == $data->user->id)
@@ -269,7 +308,6 @@
         @endif
         @endif
 
-        @endif
         <div class="mt-2">
           {{ $data->content }}
         </div>
@@ -340,10 +378,14 @@
 
       {{-- kalau user tidak memakai foto profil --}}
       @if ($data->user->image != null)
-      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{
-        $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
       @else
-      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a><i>{{ $data->created_at->format('d M, Y') }}</i>
+      <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+      <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+      <i>{{ $data->created_at->format('d M, Y') }}</i>
+      @endif
 
       @if (Auth::check())
       @if (Auth::user()->id == $data->user->id)
@@ -360,7 +402,6 @@
       @endif
 
       {{-- <p style="font-size: 20px" class="bi bi-person-circle"> <b>{{ $data->user->name }}</b> <i>3 mei 2022</i> </p> --}}
-      @endif
       <div class="mt-2">
         {{ $data->content }}
       </div>
@@ -441,10 +482,32 @@
       <i class="bi bi-arrow-return-right"> Reply to {{ $data->parent->user->name }}</i>
       <div style="margin-left: 15px" class="container">
         @if ($data->user->image != null)
-        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>
-          {{ $data->created_at->format('d M, Y') }}</i>
+        <img style="border-radius: 1000px;height:25px;width:25px" src="{{ asset('storage/photo/'.$data->user->image) }}" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
         @else
-        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt=""><a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a> <i>{{ $data->created_at->format('d M, Y') }}</i>
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i> {{ $data->created_at->format('d M, Y') }} </i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @else
+        <img style="border-radius: 1000px;height:25px;width:25px" src="/images/default-user.png" alt="">
+        @if ($data->user->specialist_id == 1)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> {{ $data->user->name }}</b></a>
+        @elseif($data->user->specialist_id == 2)
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }}</b></a>
+        @else
+        <a href="{{ route('profil.show', $data->user->username) }}"><b> dr.{{ $data->user->name }} {{ $data->user->specialist->gelar }}</b></a>
+        @endif
+        <i>{{ $data->created_at->format('d M, Y') }}</i>
+        @if ($data->user->role_id == 3)
+        <p class="btn btn-primary btn-sm bi bi-check">Doctor</p>
+        @endif
+        @endif
 
         @if (Auth::check())
         @if (Auth::user()->id == $data->user->id)
@@ -460,7 +523,6 @@
         @endif
         @endif
 
-        @endif
         <div class="mt-2">
           {{ $data->content }}
         </div>
@@ -563,13 +625,11 @@
       </div>
     </div>
     @else
-    <div class="row mt-4 container">
-      <div class="col-1 d-flex justify-content-start">
-        <img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt="">
-      </div>
-      <div class="col-11 d-flex justify-content-end">
-        <a href="/login">Response Now !!</a>
-      </div>
+    <div class="container">
+      <hr>
+      <img style="border-radius: 1000px;height:50px;width:50px" src="/images/default-user.png" alt="">
+      <a href="/login">Login To make A Comment !!!</a>
+      <hr>
     </div>
     @endif
 

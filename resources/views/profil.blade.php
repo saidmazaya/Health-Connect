@@ -161,7 +161,7 @@
                 @endif
               </li>
               @else
-              <li><strong>Nama</strong>: dr.{{ $user->name }} {{ $user->specialist->name }}
+              <li><strong>Nama</strong>: dr.{{ $user->name }} {{ $user->specialist->gelar }}
                 @if (Auth::user()->id == $user->id)
                 <a href="{{ route('profil.edit', $user->username) }}"><i class="bi bi-pencil-square">Edit</i></a>
                 @endif
