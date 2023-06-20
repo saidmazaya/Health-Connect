@@ -21,10 +21,8 @@
                 <div class="member-img">
                   <img src="assets/img/team/orang3.jpg" class="img-fluid" alt="">
                   <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/rafi_dvri/" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/muhamad-rafi-devari-hasibuan-3a36a8266" target="_blank"><i class="bi bi-linkedin"></i></a>
                   </div>
                 </div>
                 <div class="member-info">
@@ -39,10 +37,8 @@
                 <div class="member-img">
                   <img src="assets/img/team/orang1.jpg" class="img-fluid" alt="">
                   <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/said_muhammad_mazaya" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/saidmuhammadmazaya" target="_blank"><i class="bi bi-linkedin"></i></a>
                   </div>
                 </div>
                 <div class="member-info">
@@ -57,10 +53,8 @@
                 <div class="member-img">
                   <img src="assets/img/team/orang2.jpg" class="img-fluid" alt="">
                   <div class="social">
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.instagram.com/rizqyibra/" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/ibra-rizqy-7aa2021a0" target="_blank"><i class="bi bi-linkedin"></i></a>
                   </div>
                 </div>
                 <div class="member-info">
