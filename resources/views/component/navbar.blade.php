@@ -19,10 +19,10 @@
         <li><a class="nav-link scrollto o" href="{{ route('diskusi.create') }}">Create Discussion</a></li>
         <li class="dropdown"><a href="#"><span><i class="bi bi-person-circle" style="font-size: 20px"></i></span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li><a href="/profil/tes">{{ Auth::user()->name }}</a></li>
-            <li><a href="#">Drop Down 1</a></li>
-            <li><a href="#">Drop Down 2</a></li>
-            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="{{ route('profil.show', Auth::user()->username) }}">{{ Auth::user()->name }}</a></li>
+            <li><a href="/diskusi">Diskusi</a></li>
+            <li><a href="/kategori">Kategori</a></li>
+            <li><a href="/dokter">Spesialis Dokter</a></li>
             @if (Auth::user()->role_id == 1)
             <li><a href="{{ route('dashboard_admin') }}">Dashboard</a></li>
             @endif

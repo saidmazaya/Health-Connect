@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Response;
+use App\Models\Specialist;
 use Illuminate\Http\Request;
 
-class ResponseController extends Controller
+class DoctorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $specialist = Specialist::select('id', 'name', 'gelar')
+            ->where('id', '!=', 1)
+            ->paginate(9);
+
+        return view('dokter', compact('specialist'));
     }
 
     /**
@@ -28,17 +32,21 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Response::create($request->all());
-        
-        return redirect()->back()->with('message', 'Comment Berhasil di Post');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $specialist = Specialist::with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('role_id', 3);
+            })
+            ->find($id);
+
+        return view('list-dokter', compact('specialist'));
     }
 
     /**
@@ -60,16 +68,8 @@ class ResponseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $response = Response::findOrFail($id);
-        
-        if ($response->user_id !== auth()->user()->id) {
-            abort(403, 'Unauthorized');
-        }
-
-        $response->delete();
-
-        return redirect()->back()->with('message', 'Comment Berhasil di Hapus');
+        //
     }
 }

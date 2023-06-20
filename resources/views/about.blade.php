@@ -16,7 +16,7 @@
    
           <div class="row">
   
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
               <div class="member">
                 <div class="member-img">
                   <img src="assets/img/team/orang3.jpg" class="img-fluid" alt="">
@@ -34,7 +34,7 @@
               </div>
             </div>
   
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
               <div class="member">
                 <div class="member-img">
                   <img src="assets/img/team/orang1.jpg" class="img-fluid" alt="">
@@ -46,13 +46,13 @@
                   </div>
                 </div>
                 <div class="member-info">
-                  <h4>Said M Mazaya</h4>
+                  <h4>Said Muhammad Mazaya</h4>
                   <span>Chief Technology Officer</span>
                 </div>
               </div>
             </div>
   
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
               <div class="member">
                 <div class="member-img">
                   <img src="assets/img/team/orang2.jpg" class="img-fluid" alt="">

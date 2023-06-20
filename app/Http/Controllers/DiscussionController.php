@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Vote;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Response;
 use App\Models\Discussion;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DiscussionCreateRequest;
 
 class DiscussionController extends Controller
 {
@@ -24,7 +27,10 @@ class DiscussionController extends Controller
             ->where('status', 'Published');
 
         if ($sortBy === 'votes') {
-            $query->leftJoin('votes', 'discussions.id', '=', 'votes.discussion_id')
+            $query->leftJoin('votes', function ($join) {
+                $join->on('discussions.id', '=', 'votes.discussion_id')
+                    ->where('votes.type', 'Upvote');
+            })
                 ->select('discussions.id', 'discussions.title', 'discussions.content', 'discussions.slug', 'discussions.created_at', 'discussions.updated_at', 'discussions.category_id', 'discussions.author_id', DB::raw('COUNT(votes.id) AS vote_count'))
                 ->groupBy('discussions.id', 'discussions.title', 'discussions.content', 'discussions.slug', 'discussions.created_at', 'discussions.updated_at', 'discussions.category_id', 'discussions.author_id')
                 ->orderBy('vote_count', 'desc');
@@ -43,7 +49,9 @@ class DiscussionController extends Controller
      */
     public function create()
     {
-        $category = Category::select('id', 'name')->get();
+        $category = Category::select('id', 'name')
+            ->orderBy('name')
+            ->get();
 
         return view('create', compact('category'));
     }
@@ -51,11 +59,13 @@ class DiscussionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DiscussionCreateRequest $request)
     {
-        $article = Article::create($request->all());
+        $user = User::findOrFail($request->author_id);
+        $request['slug'] = $user->username . '_' . Str::slug($request->title, '-') . '-' . rand(1000000, 9999999);
+        $discussion = Discussion::create($request->all());
 
-        return redirect()->back()->with('message', 'Diskusi Berhasil Dibuat');
+        return redirect(route('home'))->with('message', 'Diskusi Berhasil Dibuat');
     }
 
     /**
@@ -101,16 +111,67 @@ class DiscussionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        // Cari diskusi berdasarkan ID
+        $discussion = Discussion::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki akses untuk mengedit diskusi
+        if ($discussion->author_id != auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Update kolom 'content' pada model diskusi
+        $discussion->content = $request->input('content');
+        $discussion->save();
+
+        return redirect()->back()->with('message', 'Diskusi berhasil diperbarui');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Cari diskusi berdasarkan ID
+        $discussion = Discussion::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki akses untuk menghapus diskusi
+        if ($discussion->author_id !== auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Hapus diskusi
+        $discussion->delete();
+
+        return redirect()->back()->with('message', 'Diskusi berhasil dihapus');
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'category_id' => 'required',
+        ]);
+
+        // Cari diskusi berdasarkan ID
+        $discussion = Discussion::findOrFail($id);
+
+        // Periksa apakah pengguna memiliki akses untuk mengedit diskusi
+        if ($discussion->author_id != auth()->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Update kolom 'category_id' pada model diskusi
+        $discussion->category_id = $request->input('category_id');
+        $discussion->save();
+
+        return redirect()->back()->with('message', 'Category berhasil diperbarui');
     }
 }

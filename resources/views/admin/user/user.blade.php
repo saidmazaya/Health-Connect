@@ -61,7 +61,7 @@
                                                 {{ $responseCount }}
                                             </td>
                                             <td>
-                                                <a href="#" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
+                                                <a href="{{ route('profil.show', $data->username) }}" class="btn-sm text-decoration-none btn-info"><i class="fa-solid fa-circle-info"></i></a>
                                                 | <a href="{{ route('user.track', $data->username) }}" class="btn-sm text-decoration-none btn-primary"><i class="fa-solid fa-shoe-prints"></i></i></a>
                                                 | <button type="button" class="btn-sm text-decoration-none btn-success accept-button" data-doctor-id="{{ $data->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $data->id }}">
                                                     <i class="fa-solid fa-user-doctor"></i>
