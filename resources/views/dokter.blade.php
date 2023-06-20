@@ -16,6 +16,15 @@
   <section id="services" class="services section-bg">
     <div class="container" data-aos="fade-up">
       <h2>Pilih Spesialis Dokter</h2>
+      <form action="{{ route('dokter.index') }}" method="GET" class="mb-3">
+        <div class="input-group">
+          <input type="text" name="search" class="form-control" placeholder="Cari nama dokter...">
+          <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+      </form>
+      @if ($specialist->isEmpty())
+      <div class="alert alert-danger">Dokter {{ $search }} tidak ditemukan </div>
+      @else
       <div class="row">
         {{-- form dokter --}}
 
@@ -40,6 +49,7 @@
         {{-- form dokter end --}}
 
       </div>
+      @endif
 
     </div>
   </section>
