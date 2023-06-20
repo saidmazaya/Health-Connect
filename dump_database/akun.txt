@@ -1,0 +1,27 @@
+Admin :
+
+Email    : adminhtc@gmail.com
+Password : adminhtc
+
+
+Dokter :
+
+Email    : said1@gmail.com
+Password : said1234
+
+Email    : rafi1@gmail.com
+Password : rafi1234
+
+
+User :
+
+Email    : said@gmail.com
+Password : said1234
+
+Email    : rafi@gmail.com
+Password : rafi1234
+
+Email    : ibra@gmail.com
+Password : ibra1234
+
+

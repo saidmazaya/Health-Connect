@@ -4,7 +4,7 @@
 
 @section('konten')
 
-<main id="main">
+<main id="main" data-aos="fade-up">
 
     <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <div class="container mt-4">
+    <div class="container mt-4" data-aos="fade-up">
 
         <hr>
 
