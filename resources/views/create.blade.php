@@ -10,7 +10,7 @@
     </div>
 </section>
 
-<div class="container-fluid page-body-wrapper mt-4">
+<div class="container-fluid page-body-wrapper mt-4" data-aos="fade-up">
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row d-flex justify-content-center">

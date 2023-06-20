@@ -10,13 +10,16 @@ class DoctorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
         $specialist = Specialist::select('id', 'name', 'gelar')
             ->where('id', '!=', 1)
+            ->where('name', 'LIKE', '%' . $search . '%')
             ->paginate(9);
 
-        return view('dokter', compact('specialist'));
+        return view('dokter', compact('specialist', 'search'));
     }
 
     /**
